@@ -1,0 +1,7 @@
+== Rails with Devise
+
+Rails app with devise integration. Supports Admin Users plus User Users.
+
+MIT License
+
+
