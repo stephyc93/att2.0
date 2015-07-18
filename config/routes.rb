@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'parents/index'
+
   get 'students/index'
 
   get 'teachers/index'
