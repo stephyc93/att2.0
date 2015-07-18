@@ -3,9 +3,44 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
+  <div class="form-group">
+    <label for="fullname">Full Name</label>
+    <input type="text" name="user[fullname]" class="form-control" id="fullname" placeholder="Jane Doe">
+  </div>
+
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <label>Are You A Parent?</label>
+    <label class="radio-inline">
+      <input type="radio" name="parent" id="user[parent1]" value="1"> Yes
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="parent" id="user[parent2]" value="0"> No
+    </label>
+  </div>
+
+  <div class="field">
+    <label>Are You A Teacher?</label>
+    <label class="radio-inline">
+      <input type="radio" name="teacher" id="user[teacher1]" value="1"> Yes
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="teacher" id="user[teacher2]" value="0"> No
+    </label>
+  </div>
+
+  <div class="field">
+    <label>Are You A Student?</label>
+    <label class="radio-inline">
+      <input type="radio" name="student" id="user[student1]" value="1"> Yes
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="student" id="user[student2]" value="0"> No
+    </label>
   </div>
 
   <div class="field">
@@ -26,4 +61,4 @@
   </div>
 <% end %>
 
-<%= render "users/shared/links" %>
+<%= render "devise/shared/links" %>
