@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'students/index'
+
   get 'teachers/index'
 
   # devise_for :users, controllers: {
