@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718225127) do
+ActiveRecord::Schema.define(version: 20150718235338) do
+
+  create_table "activies_students", id: false, force: :cascade do |t|
+    t.integer "activity_id"
+    t.integer "student_id"
+    t.integer "present"
+  end
+
+  add_index "activies_students", ["activity_id"], name: "index_activies_students_on_activity_id"
+  add_index "activies_students", ["student_id"], name: "index_activies_students_on_student_id"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "start"
+    t.datetime "end"
+    t.string   "location"
+    t.integer  "permission_slip"
+  end
 
   create_table "parents", force: :cascade do |t|
     t.string "name"
