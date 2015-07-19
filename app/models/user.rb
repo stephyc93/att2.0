@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       student = Student.create(:name => self.fullname, :user_id => self.id)
     elsif self.student?
     else
-      self.update_attributes(:teacher => '1')
+      self.update_attributes(:student => '1')
       student = Student.create(:name => self.fullname, :user_id => self.id)
     end
   end
