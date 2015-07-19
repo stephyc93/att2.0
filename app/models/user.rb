@@ -15,10 +15,13 @@ class User < ActiveRecord::Base
   def create_associated_model
   	if self.parent?
       parent = Parent.create(:name => self.fullname, :user_id => self.id)
-    elsif self.student?
-      student = Student.create(:name => self.fullname, :user_id => self.id)
-    else
+    elsif self.teacher?
       teacher = Teacher.create(:name => self.fullname, :user_id => self.id)
+      student = Student.create(:name => self.fullname, :user_id => self.id)
+    elsif self.student?
+    else
+      self.update_attributes(:student => '1')
+      student = Student.create(:name => self.fullname, :user_id => self.id)
     end
   end
 end
