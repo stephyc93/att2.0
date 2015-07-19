@@ -6,10 +6,12 @@ class StudentsController < ApplicationController
   end
 
   def invite
-  	byebug
-  	
-  	user = User.invite!(:email => "new_user@example.com", :name => "John Doe") do |u|
-	  u.skip_invitation = true
-	end
+  	user = User.invite!(:email => params[:email], :fullname => params[:name]) do |u|
+  	  u.skip_invitation = false
+  	end
+
+    flash[:notice] = "Invitation has been sent!"
+    redirect_to :back
+
   end
 end

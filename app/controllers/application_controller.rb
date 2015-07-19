@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
 
+  before_filter :set_user
+
   def after_sign_in_path_for(resource)
 
     if resource.parent?
@@ -12,10 +14,10 @@ class ApplicationController < ActionController::Base
       current_parent = Parent.where(["user_id = ?", resource.id]).first
     elsif resource.student?
       students_path
-      # current_student = Student.where :user_id => resource.id
+      current_student = Student.where(["user_id = ?", resource.id]).first
     else
       teachers_path
-      # current_teacher = Teacher.where :user_id => resource.id
+      current_teacher = Teacher.where(["user_id = ?", resource.id]).first
     end
 
   end
@@ -30,4 +32,15 @@ class ApplicationController < ActionController::Base
              :invitation_token)
     end
   end
+
+  def set_user
+    if current_user.parent?
+      @current_parent = Parent.where(["user_id = ?", current_user.id]).first
+    elsif current_user.student?
+      @current_student = Student.where(["user_id = ?", current_user.id]).first
+    else
+      @current_teacher = Teacher.where(["user_id = ?", current_user.id]).first
+    end
+  end
+
 end
