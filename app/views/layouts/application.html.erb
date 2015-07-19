@@ -20,16 +20,31 @@
     <% if !current_user %>
       <li role="presentation"><a href="/users/sign_in">Login</a></li>
     <% else %>
+      <li role="presentation">
+      <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
+      <%= link_to_if(current_user.student?, "Students", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
+      <%= link_to_if(current_user.parent?, "Parents", { controller: "parents", action: "index" }) unless current_user.teacher? || current_user.student?  %>
+      </li>
+
+      <li role="presentation">
+      <%= link_to_if(current_user.teacher?, "Profile", { controller: "teachers", action: "show", id: current_user.id }) unless current_user.student? || current_user.parent? %>
+      <%= link_to_if(current_user.student?, "Profile", { controller: "students", action: "show", id: current_user.id })  unless current_user.teacher? || current_user.parent? %>
+      <%= link_to_if(current_user.parent?, "Profile", { controller: "parents", action: "show", id: current_user.id }) unless current_user.teacher? || current_user.student?  %>
+      </li>
+
       <li role="presentation"><%=link_to("Logout", destroy_user_session_path, method: :delete) %></li>
     <% end %>
   </ul>
 </header>
 <body>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-info" %>
+    <% end %>
 
-	<p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= yield %>
 
-<%= yield %>
+  </div>
 
 </body>
 </html>

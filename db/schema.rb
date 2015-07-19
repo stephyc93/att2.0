@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718235338) do
+ActiveRecord::Schema.define(version: 20150719181403) do
 
   create_table "activies_students", id: false, force: :cascade do |t|
     t.integer "activity_id"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(version: 20150718235338) do
   end
 
   create_table "parents", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
+    t.string  "name"
+    t.string  "phone"
+    t.integer "user_id"
   end
 
   create_table "parents_students", id: false, force: :cascade do |t|
@@ -44,8 +45,23 @@ ActiveRecord::Schema.define(version: 20150718235338) do
   add_index "parents_students", ["student_id"], name: "index_parents_students_on_student_id"
 
   create_table "students", force: :cascade do |t|
-    t.string "name"
-    t.string "phone"
+    t.string  "name"
+    t.string  "phone"
+    t.integer "user_id"
+  end
+
+  create_table "students_teachers", id: false, force: :cascade do |t|
+    t.integer "student_id"
+    t.integer "teacher_id"
+  end
+
+  add_index "students_teachers", ["student_id"], name: "index_students_teachers_on_student_id"
+  add_index "students_teachers", ["teacher_id"], name: "index_students_teachers_on_teacher_id"
+
+  create_table "teachers", force: :cascade do |t|
+    t.string  "name"
+    t.string  "phone"
+    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
