@@ -15,9 +15,14 @@ class ApplicationController < ActionController::Base
     elsif resource.student?
       students_path
       current_student = Student.where(["user_id = ?", resource.id]).first
-    else
+    elsif resource.teacher?
       teachers_path
       current_teacher = Teacher.where(["user_id = ?", resource.id]).first
+    else
+      user = User.find resource.id
+      user.update_attributes(:teacher => '1')
+      current_student = Student.where(["user_id = ?", resource.id]).first
+      students_path
     end
 
   end
@@ -40,7 +45,7 @@ class ApplicationController < ActionController::Base
       @current_student = Student.where(["user_id = ?", current_user.id]).first
     else
       @current_teacher = Teacher.where(["user_id = ?", current_user.id]).first
-    end
+    end unless !current_user
   end
 
 end
