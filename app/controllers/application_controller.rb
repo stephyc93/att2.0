@@ -9,10 +9,13 @@ class ApplicationController < ActionController::Base
 
     if resource.parent?
       parents_path
+      current_parent = Parent.where(["user_id = ?", resource.id]).first
     elsif resource.student?
       students_path
+      # current_student = Student.where :user_id => resource.id
     else
       teachers_path
+      # current_teacher = Teacher.where :user_id => resource.id
     end
 
   end
