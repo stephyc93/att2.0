@@ -1,9 +1,19 @@
 Rails.application.routes.draw do
-  get 'parents/index'
 
-  get 'students/index'
 
-  get 'teachers/index'
+  # get 'parents/index'
+
+  # get 'students/index'
+
+  # get 'teachers/index'
+
+  resources :teachers
+
+  resources :students
+
+  resources :parents
+
+  post 'students/invite' => 'students#invite', as: :invite_student
 
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions',

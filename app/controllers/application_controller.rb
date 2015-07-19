@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
 
     if resource.parent?
-      parents_index_path
+      parents_path
     elsif resource.student?
-      students_index_path
+      students_path
     else
-      teachers_index_path
+      teachers_path
     end
 
   end

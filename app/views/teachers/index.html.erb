@@ -1,2 +1,51 @@
-<h1>Teachers#index</h1>
-<p>Find me in app/views/teachers/index.html.erb</p>
+<div class="row">
+<div class="col-md-12"><h1>Welcome <%= current_user.fullname %> </h1></div>
+</div>
+
+<div class="row">
+	<div class="col-md-6">
+		<% if current_user.teacher? %>
+			<div class="row">
+				<div class="col-md-12">
+					<%= form_tag("/students/invite", method: "post") do %>
+						<label>Invite a Student!</label>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email address</label>
+							<input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						</div>
+						<button type="submit" class="btn btn-default">Invite Student</button>
+					<% end %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<form>
+						<label>Create a New Activity</label>
+						<div class="form-group">
+					    	<label for="activity_name">Activity Name</label>
+					    	<input type="text" class="form-control" name="name" id="activity_name" placeholder="Super Fun Times">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="start_time">Start Date and Time</label>
+					    	<input type="text" class="form-control" name="start" id="start_time" placeholder="">
+					  	</div>
+					  	<div class="form-group">
+					    	<label for="end_time">End Date and Time</label>
+					    	<input type="text" class="form-control" name="end" id="end_time" placeholder="">
+					  	</div>
+					  	<div class="checkbox">
+						    <label>
+						      <input name="permission_slip" type="checkbox"> Permission Slip Required?
+						    </label>
+						</div>
+						<button type="submit" class="btn btn-default">Create Event</button>
+					</form>
+				</div>
+			</div>
+		<% end %>
+	</div>
+	<div class="col-md-6">
+	</div>
+</div>
+
+
