@@ -1,4 +1,10 @@
 class Users::InvitationsController < Devise::InvitationsController
+
+  def new
+    super
+  end
+
+
   private
 
   # this is called when creating invitation
