@@ -1,15 +1,17 @@
 Rails.application.routes.draw do
 
 
-  get 'activities/index'
-
-  get 'activities/show'
+  # get 'activities/index'
+  #
+  # get 'activities/show'
 
   # get 'parents/index'
 
   # get 'students/index'
 
   # get 'teachers/index'
+
+  resources :activities
 
   resources :teachers
 
