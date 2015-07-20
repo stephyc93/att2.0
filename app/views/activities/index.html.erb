@@ -8,6 +8,7 @@
         <th>Date</th>
         <th>Time</th>
         <th>Location</th>
+        <th>Permission Slip?</th>
         <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -18,7 +19,7 @@
           <td> <%= activity.date %> </td>
           <td> <%= activity.time %> </td>
           <td> <%= activity.location %> </td>
-
+          <td> <%= activity.permission_slip %></td>
           <td>
             <%= link_to activities_path(activity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-eye-open"></i>
