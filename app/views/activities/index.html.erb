@@ -19,17 +19,17 @@
           <td> <%= activity.end%> </td>
           <td> <%= activity.permission_slip %></td>
           <td>
-            <%= link_to activities_path(activity), class: "btn btn-info" do %>
+            <%= link_to activity_path(activity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
           <td>
-            <%= link_to activities_path(activity), class: "btn btn-default" do %>
+            <%= link_to edit_activity_path(activity), class: "btn btn-default" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
           <td>
-            <%= link_to activities_path(activity), method: :delete, class: "btn btn-warning" do %>
+            <%= link_to activity_path(activity), method: :delete, class: "btn btn-warning" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
           </td>
