@@ -23,7 +23,7 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<form>
+					<%= form_tag("/activites/new", method: "post") do %>
 						<label>Create a New Activity</label>
 						<div class="form-group">
 					    	<label for="activity_name">Activity Name</label>
@@ -31,11 +31,21 @@
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="start_time">Start Date and Time</label>
-					    	<input type="text" class="form-control" name="start" id="start_time" placeholder="">
+		                    <div class='input-group date' id='start_time'>
+			                    <input type="text" class="form-control" name="start" id="" placeholder="">
+						    	<span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+			                </div>
 					  	</div>
 					  	<div class="form-group">
 					    	<label for="end_time">End Date and Time</label>
-					    	<input type="text" class="form-control" name="end" id="end_time" placeholder="">
+		                    <div class='input-group date' id='end_time'>
+			                    <input type="text" class="form-control" name="end" id="end_time" placeholder="">
+					    	<span class="input-group-addon">
+		                        <span class="glyphicon glyphicon-calendar"></span>
+		                    </span>
+			                </div>
 					  	</div>
 					  	<div class="checkbox">
 						    <label>
@@ -43,7 +53,13 @@
 						    </label>
 						</div>
 						<button type="submit" class="btn btn-default">Create Event</button>
-					</form>
+					<% end %>
+					<script>
+						$(function () {
+			                $('#start_time').datetimepicker();
+			                $('#end_time').datetimepicker();
+			            });
+					</script>
 				</div>
 			</div>
 		<% end %>
