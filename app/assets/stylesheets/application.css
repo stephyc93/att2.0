@@ -1,3 +1,7 @@
+.home-body {
+  background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
+  background-repeat: no-repeat;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
