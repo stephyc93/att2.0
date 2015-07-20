@@ -15,7 +15,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <header>
-  <ul class="nav nav-pills" role="group">
+  <ul class="nav nav-pills" role="group" style="background-color: black;">
     <li role="presentation"><a href="/">Home</a></li>
     <% if !current_user %>
       <li role="presentation"><a href="/users/sign_in">Login</a></li>
@@ -30,6 +30,9 @@
       <%= link_to_if(current_user.teacher?, "Profile", { controller: "teachers", action: "show", id: current_user.id }) unless current_user.student? || current_user.parent? %>
       <%= link_to_if(current_user.student?, "Profile", { controller: "students", action: "show", id: current_user.id })  unless current_user.teacher? || current_user.parent? %>
       <%= link_to_if(current_user.parent?, "Profile", { controller: "parents", action: "show", id: current_user.id }) unless current_user.teacher? || current_user.student?  %>
+      </li>
+      <li>
+        <%= link_to_if(current_user.teacher?, "Activities", { controller: "activities", action: "index", id: current_user.id }) unless current_user.parent? || current_user.student?  %>
       </li>
 
       <li role="presentation"><%=link_to("Logout", destroy_user_session_path, method: :delete) %></li>
