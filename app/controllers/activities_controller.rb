@@ -9,9 +9,10 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = Activity.new(activity_params)
+    byebug
+    @activity = Activity.new(params)
     if @activity.save
-      redirect_to root_path
+      redirect_to activities_path
     else
       render :new
     end
@@ -45,6 +46,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:name, :date, :time, :location, :permission_slip)
+    params.require(params).permit(:name, :start, :end, :permission_slip)
   end
 end
