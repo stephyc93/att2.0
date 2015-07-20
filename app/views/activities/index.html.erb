@@ -1,2 +1,42 @@
-<h1>Activities#index</h1>
-<p>Find me in app/views/activities/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1 class="page-header text-center">Activities</h1>
+
+    <table class="table table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Location</th>
+        <th>View</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      <% @activities.each do |activity| %>
+       <tr>
+          <td> <%= activity.name %> </td>
+          <td> <%= activity.date %> </td>
+          <td> <%= activity.time %> </td>
+          <td> <%= activity.location %> </td>
+
+          <td>
+            <%= link_to activities_path(activity), class: "btn btn-info" do %>
+              <i class="glyphicon glyphicon-eye-open"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activities_path(activity), class: "btn btn-default" do %>
+              <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activities_path(activity), method: :delete, class: "btn btn-warning" do %>
+              <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>

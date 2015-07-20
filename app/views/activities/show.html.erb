@@ -1,2 +1,8 @@
-<h1>Activities#show</h1>
-<p>Find me in app/views/activities/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <h1 class="page-header text-center">Show Activity</h1>
+    <p><%= @activity.name %></p>
+      <%= link_to "Delete", activities_path(@activity.id), :class => "btn btn-danger", method: :delete %>
+      <%= link_to "Edit", activities_path(@activity.id), :class => "btn btn-warning" %>
+  </div>
+</div>
