@@ -9,9 +9,8 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    # byebug
-    # @activity = Activity.new(activity_params)
-    if @activity.save(activity_params)
+    @activity = Activity.new(activity_params)
+    if @activity.save
       redirect_to activities_path
     else
       render :new
