@@ -25,7 +25,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.update(activity_params)
-      redirect_to root_path
+      redirect_to activities_path
     else
       render :edit
     end
@@ -33,7 +33,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     if @activity.destroy
-      redirect_to root_path
+      redirect_to activities_path
     else
        flash[:notice] = "Something went wrong Data not deleted"
     end
@@ -45,6 +45,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.permit(:name, :start, :end, :permission_slip)
+    params.require(:activity).permit(:name, :start, :end, :permission_slip)
   end
 end
