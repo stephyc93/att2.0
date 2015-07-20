@@ -5,9 +5,8 @@
     <table class="table table-hover">
       <tr>
         <th>Name</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Location</th>
+        <th>Start Date</th>
+        <th>End Date</th>
         <th>Permission Slip?</th>
         <th>View</th>
         <th>Edit</th>
@@ -16,9 +15,8 @@
       <% @activities.each do |activity| %>
        <tr>
           <td> <%= activity.name %> </td>
-          <td> <%= activity.date %> </td>
-          <td> <%= activity.time %> </td>
-          <td> <%= activity.location %> </td>
+          <td> <%= activity.start %> </td>
+          <td> <%= activity.end%> </td>
           <td> <%= activity.permission_slip %></td>
           <td>
             <%= link_to activities_path(activity), class: "btn btn-info" do %>
