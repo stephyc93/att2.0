@@ -18,22 +18,28 @@
       </tr>
       <% @activities.each do |activity| %>
        <tr>
-          <td> <%= activity.name %> </td>
-          <td> <%= activity.start %> </td>
-          <td> <%= activity.end%> </td>
-          <td> <%= activity.permission_slip %></td>
+          <td>  <%= activity.name %> </td>
+          <td>  <%= activity.start %> </td>
+          <td>  <%= activity.end%> </td>
+          <td style="text-align: center;">  <% if activity.permission_slip %>
+                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                <% else %>
+                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                <% end %>
+          </td>
+
           <td>
-            <%= link_to activity_path(activity), class: "btn btn-info" do %>
+            <%= link_to activity_path(activity), class: "btn btn-primary" do %>
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
           <td>
-            <%= link_to edit_activity_path(activity), class: "btn btn-default" do %>
+            <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
           <td>
-            <%= link_to activity_path(activity), method: :delete, class: "btn btn-warning" do %>
+            <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
           </td>
