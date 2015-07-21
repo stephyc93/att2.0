@@ -8,7 +8,7 @@ class StudentsController < ApplicationController
 
   def invite
   	user = User.invite!(:email => params[:email], :fullname => params[:name]) do |u|
-  	  u.skip_invitation = false
+  	   u.skip_invitation = false
   	end
 
     flash[:notice] = "Invitation has been sent!"
