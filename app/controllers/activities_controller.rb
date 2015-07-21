@@ -45,13 +45,32 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  private
-  def find_activity
-    @activity = Activity.find_by(id: params[:id])
+  def choose_students
+     @students = Student.all
   end
 
-  def activity_params
-    params.permit(:name, :start, :end, :permission_slip)
+  def add_students 
+    binding.pry
+    # Activities_students.new(student_id: )
+
+
+
+    # @student = Student.find_by[:id params[:student_id]]
+    # if @student.save 
+    #   redirect_to activity_path
+    # else
+    #   render :choose_students
+    # end
   end
+
+  private
+    
+    def find_activity
+      @activity = Activity.find_by(id: params[:id])
+    end
+
+    def activity_params
+      params.permit(:name, :start, :end, :permission_slip)
+    end
 
 end

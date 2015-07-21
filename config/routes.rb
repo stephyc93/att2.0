@@ -21,6 +21,11 @@ Rails.application.routes.draw do
 
   post 'students/invite' => 'students#invite', as: :invite_student
 
+  get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
+
+  post 'activities/:activity_id/add_students' => 'activities#add_students', as: :add_students
+
+
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions',
   #       registrations: 'users/registrations'
