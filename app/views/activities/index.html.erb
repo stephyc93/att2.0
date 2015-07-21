@@ -1,20 +1,22 @@
 <div class="container">
   <div class="row">
     <h1 class="page-header text-center">Activities</h1>
-    <p align="right"><%= link_to new_activity_path, class: "btn btn-success" do %>
-          <i class="glyphicon glyphicon-plus"></i>
-        <% end %>
+    <p align="right">Add New activity
+      <br />
+      <%= link_to new_activity_path, class: "btn btn-success" do %>
+      <i class="glyphicon glyphicon-plus"></i>
+    <% end %>
     </p>
 
     <table class="table table-hover">
       <tr>
-        <th>Name</th>
+        <th>Activity Name</th>
         <th>Start Date</th>
         <th>End Date</th>
         <th>Permission Slip?</th>
-        <th>View</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>View Activity</th>
+        <th>Edit Activity</th>
+        <th>Delete Activity</th>
       </tr>
       <% @activities.each do |activity| %>
        <tr>
@@ -22,7 +24,7 @@
           <td>  <%= activity.start %> </td>
           <td>  <%= activity.end%> </td>
           <td style="text-align: center;">  <% if activity.permission_slip %>
-                  <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
                   <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 <% end %>
