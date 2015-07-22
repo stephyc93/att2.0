@@ -14,9 +14,14 @@
         <th>Start Date</th>
         <th>End Date</th>
         <th>Permission Slip?</th>
-        <th>View Activity</th>
-        <th>Edit Activity</th>
-        <th>Delete Activity</th>
+        <% if @current_teacher.present? %>
+          <th>View Activity</th>
+          <th>Edit Activity</th>
+          <th>Delete Activity</th>
+        <% end %>
+        <% if @current_student.present? %>
+          <th>Sign Up?
+        <% end %>
       </tr>
       <% @activities.each do |activity| %>
        <tr>
@@ -30,21 +35,30 @@
                 <% end %>
           </td>
 
-          <td>
-            <%= link_to activity_path(activity), class: "btn btn-primary" do %>
-              <i class="glyphicon glyphicon-eye-open"></i>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
-              <i class="glyphicon glyphicon-pencil"></i>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
-              <i class="glyphicon glyphicon-trash"></i>
-            <% end %>
-          </td>
+          <% if @current_teacher.present? %>
+            <td>
+              <%= link_to activity_path(activity), class: "btn btn-primary" do %>
+                <i class="glyphicon glyphicon-eye-open"></i>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
+                <i class="glyphicon glyphicon-trash"></i>
+              <% end %>
+            </td>
+          <% end %>
+          <% if @current_student.present? %>
+            <td>
+              <%= link_to student_sign_up_path(activity), class: "btn btn-primary" do %>
+                <i class="glyphicon glyphicon-pencil"></i>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </table>
