@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   require 'time'
-  before_action :find_activity, only:[:show, :edit, :update, :destroy]
+  before_action :find_activity, only:[:show, :edit, :update, :destroy, :attendance]
   def index
     @activities = Activity.all
   end
@@ -52,6 +52,30 @@ class ActivitiesController < ApplicationController
     redirect_to :back
   end
 
+  # def confirmjob
+  #   @job = Job.find(params[:id])
+  #   @job.employments.update_attributes(:confirmed, 1)
+  #   flash[:notice] = "Job Confirmed"
+  #   redirect_to :dashboard
+  # end
+
+  def Attendance
+    @activity = Activity.find params[:id]
+    @activity.students.update_attributes(:attendance, 1)
+    flash[:notice] = "attendance taken"
+    redirect_to teacher_path
+#       <input type="checkbox" id="post_validate" name="post[validated]"
+#                                    value="1" checked="checked" />
+# <input name="post[validated]" type="hidden" value="0" />
+
+#       <input type="hidden"   name="model[attr]" value="0" />
+# <input type="checkbox" name="model[attr]" value="1" />
+
+# <%= hidden_field_tag 'model_name[column_name]', '0' %>
+# <%= check_box_tag 'model_name[column_name]', 1, (@data.model_name.column_name == 1 ? true : false) %>
+
+  end
+
   def choose_students
      @students = Student.all
   end
@@ -76,7 +100,7 @@ class ActivitiesController < ApplicationController
     end
 
     def activity_params
-      params.require(:activity).permit(:name, :start, :end, :permission_slip)
+      params.require(:activity).permit(:name, :start, :end, :permission_slip, :attendance)
     end
 
 end
