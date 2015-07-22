@@ -45,18 +45,24 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def student_sign_up
+    @activity = Activity.find params[:activity_id]
+    @activity.students << @current_student
+    flash[:notice] = "You have signed up for the event"
+    redirect_to :back
+  end
+
   def choose_students
      @students = Student.all
   end
 
-  def add_students 
-    binding.pry
+  def add_students
     # Activities_students.new(student_id: )
 
 
 
     # @student = Student.find_by[:id params[:student_id]]
-    # if @student.save 
+    # if @student.save
     #   redirect_to activity_path
     # else
     #   render :choose_students
@@ -64,7 +70,7 @@ class ActivitiesController < ApplicationController
   end
 
   private
-    
+
     def find_activity
       @activity = Activity.find_by(id: params[:id])
     end

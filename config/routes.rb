@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   post 'activities/:activity_id/add_students' => 'activities#add_students', as: :add_students
 
+  match 'activities/:activity_id/student_sign_up' => 'activities#student_sign_up', as: :student_sign_up, via: :all
+
 
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions',
