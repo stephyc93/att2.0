@@ -7,8 +7,9 @@ class Student < ActiveRecord::Base
   belongs_to :parents
 
   def self.without_activity_enrollment(activity_id)
-    includes(:activity_students).
+    Student.includes(:activity_students).
       references(:activity_students).
       where.not(activity_students: { activity_id: activity_id})
   end
+
 end

@@ -1,6 +1,8 @@
 class ActivitiesController < ApplicationController
   require 'time'
+  
   before_action :find_activity, only:[:show, :edit, :update, :destroy]
+  
   def index
     @activities = Activity.all
   end
@@ -47,11 +49,24 @@ class ActivitiesController < ApplicationController
 
   def choose_students
     activity_id = params[:activity_id]
-    @students = Student.without_activity_enrollment(activity_id)
+    @students = Student.all
+    # @students = Student.without_activity_enrollment(activity_id)
+    # binding.pry
   end
 
-  def remove_students
-    #### Build this out as the antitheses of the choose students
+  def remove_student
+    @student_id = params[:student_id]
+    @activity_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    
+    if @activity_student.destroy
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Unenrollment failed!'
+      render :choose_students
+    end
   end
 
   def add_student
@@ -70,6 +85,8 @@ class ActivitiesController < ApplicationController
       render :choose_students
     end
   end
+
+
 
   private
     
