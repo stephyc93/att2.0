@@ -5,4 +5,5 @@ class Activity < ActiveRecord::Base
   has_many :students, through: :activity_students
    
    
+
 end

@@ -3,6 +3,7 @@ class Student < ActiveRecord::Base
   has_many :activity_students
   has_many :activities, through: :activity_students
 
+
   belongs_to :teachers
   belongs_to :parents
 

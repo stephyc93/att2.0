@@ -26,6 +26,8 @@ Rails.application.routes.draw do
   get 'activities/:activity_id/add_student' => 'activities#add_student', as: :add_student
   get 'activities/:activity_id/remove_student' => 'activities#remove_student', as: :remove_student
 
+  match 'activities/:activity_id/student_sign_up' => 'activities#student_sign_up', as: :student_sign_up, via: :all
+
   
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions',
@@ -39,6 +41,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  get '/about' => 'welcome#about'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
