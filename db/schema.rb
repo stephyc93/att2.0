@@ -13,14 +13,17 @@
 
 ActiveRecord::Schema.define(version: 20150720010321) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "activies_students", id: false, force: :cascade do |t|
     t.integer "activity_id"
     t.integer "student_id"
     t.integer "present"
   end
 
-  add_index "activies_students", ["activity_id"], name: "index_activies_students_on_activity_id"
-  add_index "activies_students", ["student_id"], name: "index_activies_students_on_student_id"
+  add_index "activies_students", ["activity_id"], name: "index_activies_students_on_activity_id", using: :btree
+  add_index "activies_students", ["student_id"], name: "index_activies_students_on_student_id", using: :btree
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -42,8 +45,8 @@ ActiveRecord::Schema.define(version: 20150720010321) do
     t.integer "student_id"
   end
 
-  add_index "parents_students", ["parent_id"], name: "index_parents_students_on_parent_id"
-  add_index "parents_students", ["student_id"], name: "index_parents_students_on_student_id"
+  add_index "parents_students", ["parent_id"], name: "index_parents_students_on_parent_id", using: :btree
+  add_index "parents_students", ["student_id"], name: "index_parents_students_on_student_id", using: :btree
 
   create_table "students", force: :cascade do |t|
     t.string  "name"
@@ -56,8 +59,8 @@ ActiveRecord::Schema.define(version: 20150720010321) do
     t.integer "teacher_id"
   end
 
-  add_index "students_teachers", ["student_id"], name: "index_students_teachers_on_student_id"
-  add_index "students_teachers", ["teacher_id"], name: "index_students_teachers_on_teacher_id"
+  add_index "students_teachers", ["student_id"], name: "index_students_teachers_on_student_id", using: :btree
+  add_index "students_teachers", ["teacher_id"], name: "index_students_teachers_on_teacher_id", using: :btree
 
   create_table "teachers", force: :cascade do |t|
     t.string  "name"
@@ -93,10 +96,14 @@ ActiveRecord::Schema.define(version: 20150720010321) do
     t.integer  "invitations_count",      default: 0
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true
-  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count"
-  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "activities", "teachers"
+  add_foreign_key "parents", "users"
+  add_foreign_key "students", "users"
+  add_foreign_key "teachers", "users"
 end
