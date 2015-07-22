@@ -10,8 +10,8 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    params[:start] = DateTime.strptime(params[:start],'%m/%d/%Y %I:%M %p')
-    params[:end] = DateTime.strptime(params[:end],'%m/%d/%Y %I:%M %p')
+    params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
+    params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     @activity = Activity.new(activity_params)
 
     if @activity.save
@@ -28,8 +28,8 @@ class ActivitiesController < ApplicationController
   end
 
   def update
-    params[:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
-    params[:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
+    params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
+    params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     if @activity.update(activity_params)
       redirect_to activities_path
     else
@@ -45,18 +45,24 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def student_sign_up
+    @activity = Activity.find params[:activity_id]
+    @activity.students << @current_student
+    flash[:notice] = "You have signed up for the event"
+    redirect_to :back
+  end
+
   def choose_students
      @students = Student.all
   end
 
-  def add_students 
-    binding.pry
+  def add_students
     # Activities_students.new(student_id: )
 
 
 
     # @student = Student.find_by[:id params[:student_id]]
-    # if @student.save 
+    # if @student.save
     #   redirect_to activity_path
     # else
     #   render :choose_students
@@ -64,13 +70,13 @@ class ActivitiesController < ApplicationController
   end
 
   private
-    
+
     def find_activity
       @activity = Activity.find_by(id: params[:id])
     end
 
     def activity_params
-      params.permit(:name, :start, :end, :permission_slip)
+      params.require(:activity).permit(:name, :start, :end, :permission_slip)
     end
 
 end
