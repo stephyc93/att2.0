@@ -1,5 +1,6 @@
 class TeachersController < ApplicationController
   def index
+  	@activity = Activity.new
   end
 
   def show
