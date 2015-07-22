@@ -46,21 +46,29 @@ class ActivitiesController < ApplicationController
   end
 
   def choose_students
-     @students = Student.all
+    activity_id = params[:activity_id]
+    @students = Student.without_activity_enrollment(activity_id)
   end
 
-  def add_students 
-    binding.pry
-    # Activities_students.new(student_id: )
+  def remove_students
+    #### Build this out as the antitheses of the choose students
+  end
 
+  def add_student
+    # byebug
+    @student_id = params[:student_id]
+    enrollment = ActivityStudent.new(activity_id: params[:activity_id], 
+                                      student_id: @student_id)
 
-
-    # @student = Student.find_by[:id params[:student_id]]
-    # if @student.save 
-    #   redirect_to activity_path
-    # else
-    #   render :choose_students
-    # end
+    if enrollment.save
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Enrollment failed!'
+      render :choose_students
+    end
   end
 
   private

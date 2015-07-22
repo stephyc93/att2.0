@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
 
-  post 'activities/:activity_id/add_students' => 'activities#add_students', as: :add_students
+  get 'activities/:activity_id/add_student' => 'activities#add_student', as: :add_student
 
 
   # devise_for :users, controllers: {
