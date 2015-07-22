@@ -88,9 +88,9 @@ class ActivitiesController < ApplicationController
 
   def remove_student
     @student_id = params[:student_id]
-    @activity_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    @activities_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
     
-    if @activity_student.destroy
+    if @activities_student.destroy
       respond_to do |format|
         format.html
         format.js

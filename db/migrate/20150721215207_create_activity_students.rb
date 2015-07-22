@@ -1,6 +1,6 @@
 class CreateActivityStudents < ActiveRecord::Migration
   def change
-    create_table :activity_students do |t|
+    create_table :activities_students do |t|
 
       t.timestamps null: false
     end
