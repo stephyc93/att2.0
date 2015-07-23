@@ -1,29 +1,28 @@
-
-<%= form_for :activity_students do |f| %>
-  <% @students.each do |student| %>
-    <%= f.label student.name %>
-    <%= f.check_box :student_id %>
-  <% end %>
-
- <%= link_to "Add Students", add_students_path(params[:activity_id]), :class => "btn btn-success", method: :post %>
-
- <% end %>
-
-
-
-
-
- <table class="table">
-    <tr>
-      <th>check Box</th>
-      <th>Student Name</th>
-      <th>Student phone</th>
-    </tr>
-  <% @students.each do |student| %>
+<table class="table">
   <tr>
-    <td><input type="checkbox"  name="present"  /></td>
-    <td><%= student.name %></td>
-    <td><%= student.phone %></td>
+    <th colspan="2"><h2> Enroll Students</h2></th>
   </tr>
+  <% @students.each do |student| %>
+    <div id='<%= student.id %>' >
+      <tr>
+        <td>
+          <strong><%= student.name %></strong>
+        </td>
+        <td>
+          <% if student.activities.include? Activity.find(params[:activity_id]) %>
+            <%= link_to "Unenroll Student", remove_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-danger", id: "button" + student.id.to_s %>
+          <% else %>
+            <%= link_to "Add Student", add_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-success", id: "button" + student.id.to_s %>
+          <% end %>
+        </td>
+      </tr>
+    </div>
+    <br>
   <% end %>
 </table>
+
+
+
+
+
+ 

@@ -1,6 +1,9 @@
 class ActivitiesController < ApplicationController
+  
   require 'time'
+
   before_action :find_activity, only:[:show, :edit, :update, :destroy, :attendance]
+
   def index
     @activities = Activity.all
   end
@@ -22,6 +25,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @activity = Activity.find params[:id]
   end
 
   def edit
@@ -45,21 +49,31 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  def student_sign_up
-    @activity = Activity.find params[:activity_id]
-    @activity.students << @current_student
-    flash[:notice] = "You have signed up for the event"
+  def confirmAttendance
+    @activity = Activity.find(params[:activity_id])
+    @student = Student.find params[:student_id]
+    present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.first.to_i
+    present = present == 1 ? 0 : 1
+    ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
+
+    flash[:notice] = "#{@student.name} confirmed at the event."
     redirect_to :back
   end
 
-  # def confirmjob
-  #   @job = Job.find(params[:id])
-  #   @job.employments.update_attributes(:confirmed, 1)
-  #   flash[:notice] = "Job Confirmed"
-  #   redirect_to :dashboard
-  # end
+  def student_sign_up
+    @activity = Activity.find params[:activity_id]
+    if @activity.students.exists? @current_student.id
+      @activity.students.delete(@current_student)
+      flash[:notice] = "You have removed yourself from the event."
+    else
+      flash[:notice] = "You have signed up for the event"
+      @activity.students << @current_student
+    end
 
-  def Attendance
+    redirect_to :back
+  end
+
+  def attendance
     @activity = Activity.find params[:id]
     @activity.students.update_attributes(:attendance, 1)
     flash[:notice] = "attendance taken"
@@ -77,21 +91,45 @@ class ActivitiesController < ApplicationController
   end
 
   def choose_students
-     @students = Student.all
+    activity_id = params[:activity_id]
+    @students = Student.all
+    # @students = Student.without_activity_enrollment(activity_id)
+    # binding.pry
   end
 
-  def add_students
-    # Activities_students.new(student_id: )
-
-
-
-    # @student = Student.find_by[:id params[:student_id]]
-    # if @student.save
-    #   redirect_to activity_path
-    # else
-    #   render :choose_students
-    # end
+  def remove_student
+    @student_id = params[:student_id]
+    @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    
+    if @activities_student.destroy
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Unenrollment failed!'
+      render :choose_students
+    end
   end
+
+  def add_student
+    # byebug
+    @student_id = params[:student_id]
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id], 
+                                      student_id: @student_id)
+
+    if enrollment.save
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Enrollment failed!'
+      render :choose_students
+    end
+  end
+
+
 
   private
 

@@ -2,6 +2,12 @@
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
 }
+
+#h1 {
+  text-align: center;
+  color: white;
+  }
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -22,9 +28,6 @@
  body: {
   background-image: url(assets/)
  }
-.att-book .img-responsive {
-    margin: 0 auto;
-}
  /* start of about me page */
  .portfolio-box {
     display: block;
