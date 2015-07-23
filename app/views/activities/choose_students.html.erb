@@ -1,14 +1,25 @@
-
+<table class="table">
+  <tr>
+    <th colspan="2"><h2> Enroll Students</h2></th>
+  </tr>
   <% @students.each do |student| %>
     <div id='<%= student.id %>' >
-      <strong><%= student.name %></strong>
-      <% if student.activities.include? Activity.find(params[:activity_id]) %>
-        <%= link_to "Unenroll Student", remove_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-danger", id: "button" + student.id.to_s %>
-      <% else %>
-        <%= link_to "Add Student", add_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-success", id: "button" + student.id.to_s %></div>
-      <% end %>
+      <tr>
+        <td>
+          <strong><%= student.name %></strong>
+        </td>
+        <td>
+          <% if student.activities.include? Activity.find(params[:activity_id]) %>
+            <%= link_to "Unenroll Student", remove_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-danger", id: "button" + student.id.to_s %>
+          <% else %>
+            <%= link_to "Add Student", add_student_path(params[:activity_id], student_id: student.id), remote: true , :class => "btn btn-success", id: "button" + student.id.to_s %>
+          <% end %>
+        </td>
+      </tr>
+    </div>
     <br>
   <% end %>
+</table>
 
 
 

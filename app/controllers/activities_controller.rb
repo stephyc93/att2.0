@@ -25,6 +25,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @activity = Activity.find params[:id]
   end
 
   def edit
@@ -61,17 +62,16 @@ class ActivitiesController < ApplicationController
 
   def student_sign_up
     @activity = Activity.find params[:activity_id]
-    @activity.students << @current_student
-    flash[:notice] = "You have signed up for the event"
+    if @activity.students.exists? @current_student.id
+      @activity.students.delete(@current_student)
+      flash[:notice] = "You have removed yourself from the event."
+    else
+      flash[:notice] = "You have signed up for the event"
+      @activity.students << @current_student
+    end
+
     redirect_to :back
   end
-
-  # def confirmjob
-  #   @job = Job.find(params[:id])
-  #   @job.employments.update_attributes(:confirmed, 1)
-  #   flash[:notice] = "Job Confirmed"
-  #   redirect_to :dashboard
-  # end
 
   def attendance
     @activity = Activity.find params[:id]
@@ -99,7 +99,7 @@ class ActivitiesController < ApplicationController
 
   def remove_student
     @student_id = params[:student_id]
-    @activities_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
     
     if @activities_student.destroy
       respond_to do |format|
@@ -115,7 +115,7 @@ class ActivitiesController < ApplicationController
   def add_student
     # byebug
     @student_id = params[:student_id]
-    enrollment = ActivityStudent.new(activity_id: params[:activity_id], 
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id], 
                                       student_id: @student_id)
 
     if enrollment.save
