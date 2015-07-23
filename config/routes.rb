@@ -21,6 +21,15 @@ Rails.application.routes.draw do
 
   post 'students/invite' => 'students#invite', as: :invite_student
 
+  get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
+
+  get 'activities/:activity_id/add_student' => 'activities#add_student', as: :add_student
+  get 'activities/:activity_id/remove_student' => 'activities#remove_student', as: :remove_student
+
+  match 'activities/:activity_id/student_sign_up' => 'activities#student_sign_up', as: :student_sign_up, via: :all
+
+  match 'activities/:activity_id/confirmAttendance/:student_id' => 'activities#confirmAttendance', as: :activity_attendance, via: :all
+
   # devise_for :users, controllers: {
   #       sessions: 'users/sessions',
   #       registrations: 'users/registrations'
@@ -33,6 +42,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  get '/about' => 'welcome#about'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
