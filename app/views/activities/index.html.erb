@@ -54,7 +54,9 @@
               <% end %>
             </td>
           <% end %>
-          <% attending = activity.students.exists? @current_student.id %>
+          <% if @current_student.present?  %>
+            <% attending = activity.students.exists? @current_student.id %>
+            <% end %>
           <% if @current_student.present? %>
             <td>
               <% if attending %>
