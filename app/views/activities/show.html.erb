@@ -16,14 +16,12 @@
         <br>
         <tr>
           <td><%= student.name %></td>
-          <td><input type="checkbox"/></td>
+          <td><input value="1" name="attendance" type="checkbox"/></td>
           <td><%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %></td>
         </tr>
         <% end %>
       </table>
       <!-- <%#= link_to "Attendance", :action => :attendance, :id => student.id %> -->
-
-       
     </div>
 
 

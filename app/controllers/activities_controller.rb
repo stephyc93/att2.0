@@ -50,7 +50,13 @@ class ActivitiesController < ApplicationController
 
   def confirmAttendance
     @activity = Activity.find(params[:activity_id])
-    ActivitiesStudent.confirm!(@activity.id, params[:student_id])
+    @student = Student.find params[:student_id]
+    present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.first.to_i
+    present = present == 1 ? 0 : 1
+    ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
+
+    flash[:notice] = "#{@student.name} confirmed at the event."
+    redirect_to :back
   end
 
   def student_sign_up
