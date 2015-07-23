@@ -6,11 +6,11 @@
       <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
       <%= link_to "Delete Activity", activity_path(@activity.id), :class => "btn btn-danger", method: :delete %>
       <%= link_to "Edit Activity", edit_activity_path(@activity.id), :class => "btn btn-info" %>
-      <table>
+      <table class="table">
         <tr>
-          <th>Students</th>
-          <th><%= Date.today %></th>
-          <th></th>
+          <th><h3>Students</h3></th>
+          <th><h3><%= Date.today %></h3></th>
+          <th><h3>Attendance</h3></th>
         </tr>
         <% @activity.students.each do |student| %>
         <br>
