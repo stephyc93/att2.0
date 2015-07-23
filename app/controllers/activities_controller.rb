@@ -66,13 +66,6 @@ class ActivitiesController < ApplicationController
     redirect_to :back
   end
 
-  # def confirmjob
-  #   @job = Job.find(params[:id])
-  #   @job.employments.update_attributes(:confirmed, 1)
-  #   flash[:notice] = "Job Confirmed"
-  #   redirect_to :dashboard
-  # end
-
   def attendance
     @activity = Activity.find params[:id]
     @activity.students.update_attributes(:attendance, 1)
@@ -99,7 +92,7 @@ class ActivitiesController < ApplicationController
 
   def remove_student
     @student_id = params[:student_id]
-    @activities_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
     
     if @activities_student.destroy
       respond_to do |format|
@@ -115,7 +108,7 @@ class ActivitiesController < ApplicationController
   def add_student
     # byebug
     @student_id = params[:student_id]
-    enrollment = ActivityStudent.new(activity_id: params[:activity_id], 
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id], 
                                       student_id: @student_id)
 
     if enrollment.save
