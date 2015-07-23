@@ -3,7 +3,7 @@
     <h1 class="page-header text-center">Show Activity</h1>
     <div>
       <h3><%= @activity.name %></h3>
-      <!-- link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %> -->
+      <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
       <%= link_to "Delete Activity", activity_path(@activity.id), :class => "btn btn-danger", method: :delete %>
       <%= link_to "Edit Activity", edit_activity_path(@activity.id), :class => "btn btn-info" %>
       <table>
@@ -21,7 +21,6 @@
         </tr>
         <% end %>
       </table>
-      <!-- <%#= link_to "Attendance", :action => :attendance, :id => student.id %> -->
     </div>
 
 
