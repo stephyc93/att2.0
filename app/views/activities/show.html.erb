@@ -16,7 +16,13 @@
         <br>
         <tr>
           <td><%= student.name %></td>
-          <td><input value="1" name="attendance" type="checkbox"/></td>
+          <td>
+            <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
+              <input value="1" name="attendance" type="checkbox" checked/>
+            <% else %>
+              <input value="1" name="attendance" type="checkbox"/>
+            <% end %>
+          </td>
           <td><%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %></td>
         </tr>
         <% end %>
