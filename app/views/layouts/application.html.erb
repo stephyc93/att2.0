@@ -28,9 +28,9 @@
       </li>
 
       <li role="presentation">
-      <%= link_to_if(current_user.teacher?, "Profile", { controller: "teachers", action: "show", id: current_user.id }) unless current_user.student? || current_user.parent? %>
-      <%= link_to_if(current_user.student?, "Profile", { controller: "students", action: "show", id: current_user.id })  unless current_user.teacher? || current_user.parent? %>
-      <%= link_to_if(current_user.parent?, "Profile", { controller: "parents", action: "show", id: current_user.id }) unless current_user.teacher? || current_user.student?  %>
+      <%= link_to_if(current_user.teacher?, "Attendance", { controller: "teachers", action: "show", id: current_user.id }) unless current_user.student? || current_user.parent? %>
+      <%= link_to_if(current_user.student?, "Attendance", { controller: "students", action: "show", id: current_user.id })  unless current_user.teacher? || current_user.parent? %>
+      <%= link_to_if(current_user.parent?, "Attendance", { controller: "parents", action: "show", id: current_user.id }) unless current_user.teacher? || current_user.student?  %>
       </li>
       <li>
 
