@@ -45,6 +45,11 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def confirmAttendance
+    @activity = Activity.find(params[:activity_id])
+    ActivitiesStudent.confirm!(@activity.id, params[:student_id])
+  end
+
   def student_sign_up
     @activity = Activity.find params[:activity_id]
     @activity.students << @current_student
