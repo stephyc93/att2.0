@@ -1,6 +1,9 @@
 class ActivitiesController < ApplicationController
+  
   require 'time'
+
   before_action :find_activity, only:[:show, :edit, :update, :destroy, :attendance]
+
   def index
     @activities = Activity.all
   end
@@ -59,7 +62,7 @@ class ActivitiesController < ApplicationController
   #   redirect_to :dashboard
   # end
 
-  def Attendance
+  def attendance
     @activity = Activity.find params[:id]
     @activity.students.update_attributes(:attendance, 1)
     flash[:notice] = "attendance taken"
@@ -77,21 +80,45 @@ class ActivitiesController < ApplicationController
   end
 
   def choose_students
-     @students = Student.all
+    activity_id = params[:activity_id]
+    @students = Student.all
+    # @students = Student.without_activity_enrollment(activity_id)
+    # binding.pry
   end
 
-  def add_students
-    # Activities_students.new(student_id: )
-
-
-
-    # @student = Student.find_by[:id params[:student_id]]
-    # if @student.save
-    #   redirect_to activity_path
-    # else
-    #   render :choose_students
-    # end
+  def remove_student
+    @student_id = params[:student_id]
+    @activities_student = ActivityStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
+    
+    if @activities_student.destroy
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Unenrollment failed!'
+      render :choose_students
+    end
   end
+
+  def add_student
+    # byebug
+    @student_id = params[:student_id]
+    enrollment = ActivityStudent.new(activity_id: params[:activity_id], 
+                                      student_id: @student_id)
+
+    if enrollment.save
+      respond_to do |format|
+        format.html
+        format.js
+      end
+    else
+      flash[:warning] = 'Enrollment failed!'
+      render :choose_students
+    end
+  end
+
+
 
   private
 
