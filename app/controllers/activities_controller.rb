@@ -25,6 +25,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @activity = Activity.find params[:id]
   end
 
   def edit
@@ -61,8 +62,14 @@ class ActivitiesController < ApplicationController
 
   def student_sign_up
     @activity = Activity.find params[:activity_id]
-    @activity.students << @current_student
-    flash[:notice] = "You have signed up for the event"
+    if @activity.students.exists? @current_student.id
+      @activity.students.delete(@current_student)
+      flash[:notice] = "You have removed yourself from the event."
+    else
+      flash[:notice] = "You have signed up for the event"
+      @activity.students << @current_student
+    end
+
     redirect_to :back
   end
 

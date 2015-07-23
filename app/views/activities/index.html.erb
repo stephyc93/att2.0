@@ -54,10 +54,17 @@
               <% end %>
             </td>
           <% end %>
+          <% attending = activity.students.exists? @current_student.id %>
           <% if @current_student.present? %>
             <td>
-              <%= link_to student_sign_up_path(activity), class: "btn btn-primary" do %>
-                <i class="glyphicon glyphicon-pencil"></i>
+              <% if attending %>
+                <%= link_to student_sign_up_path(activity), class: "btn btn-danger" do %>
+                  <i class="glyphicon glyphicon-trash"></i>
+                <% end %>
+              <% else %>
+                <%= link_to student_sign_up_path(activity), class: "btn btn-primary" do %>
+                  <i class="glyphicon glyphicon-pencil"></i>
+                <% end %>
               <% end %>
             </td>
           <% end %>
