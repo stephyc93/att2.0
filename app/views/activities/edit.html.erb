@@ -25,13 +25,14 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="name">Location</label>
+        <label for="location">Location</label>
         <%= f.text_field :location, class: 'form-control'  %>
       </div>
       <div class="form-group">
         <label for="location">Description</label>
         <%= f.text_area :description, cols: 20, rows: 10, class: 'form-control'  %>
       </div>
+
       <div class="checkbox">
         <label>
           <input name="permission_slip" type="checkbox" value="1"> Permission Slip Required?

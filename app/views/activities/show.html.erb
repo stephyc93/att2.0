@@ -2,7 +2,13 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-md-12"><h3><%= @activity.name %></h3></div>
+        <div class="col-md-12">
+        <h3><%= @activity.name %></h3>
+         <% if (@activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date) || ( @activity.start.to_date > Time.now.to_date) %>
+          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
+          <br>
+        <% end %>
+        </div>
       </div> <!-- /row -->
       <div class="row">
         <div class="col-md-12"><p><%= @activity.description %></p></div>
@@ -12,35 +18,49 @@
             <div id="map-canvas"></div>
         </div> <!-- /map-container col-md-12 -->
       </div> <!-- /row -->
-        <% if @current_teacher.present? %>
+      <div class="row">
+        <div class="col-md-12">
+            <% if @current_teacher.present? %>
+              <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
+              <%= link_to "Delete Activity", activity_path(@activity.id), :class => "btn btn-danger", method: :delete %>
+              <%= link_to "Edit Activity", edit_activity_path(@activity.id), :class => "btn btn-info" %>
+              <table class="table">
 
-          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
-          <%= link_to "Delete Activity", activity_path(@activity.id), :class => "btn btn-danger", method: :delete %>
-          <%= link_to "Edit Activity", edit_activity_path(@activity.id), :class => "btn btn-info" %>
-          <table class="table">
+                <tr>
+                  <th><h3>Students</h3></th>
+                  <th><h3><%= Date.today %></h3></th>
+                  <th><h3>Attendance</h3></th>
+                </tr>
 
-            <tr>
-              <th><h3>Students</h3></th>
-              <th><h3><%= Date.today %></h3></th>
-              <th><h3>Attendance</h3></th>
-            </tr>
-
-            <% @activity.students.each do |student| %>
-              <tr>
-                <td><%= student.name %></td>
-                <td>
-                  <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
-                    <input value="1" name="attendance" type="checkbox" checked/>
-                  <% else %>
-                    <input value="1" name="attendance" type="checkbox"/>
+                <% @activity.students.each do |student| %>
+                  <tr>
+                    <td><%= student.name %></td>
+                    <% if @activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date %>
+                    <td>
+                      <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
+                        <input value="1" name="attendance" type="checkbox" checked/>
+                      <% else %>
+                        <input value="1" name="attendance" type="checkbox"/>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %>
+                    </td>
                   <% end %>
-                </td>
-                <td><%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %></td>
-              </tr>
+                    <td>
+                      <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
+                        <input value="1" name="attendance" type="checkbox" checked/>
+                      <% else %>
+                        <input value="1" name="attendance" type="checkbox"/>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
             <% end %>
+        </div> <!-- /col-md-12 -->
+      </div> <!-- /row -->
 
-        <% end %>
-      </table>
     </div> <!-- /col-md-12 -->
   </div> <!-- /row -->
 </div>
@@ -67,3 +87,4 @@
       })
 
     </script>
+
