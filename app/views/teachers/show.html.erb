@@ -1,10 +1,14 @@
-<!-- <h1>Teacher Show</h1>
-<% if @checked_value == 1 %>
-<% byebug %>
-  <% @student.each do |student| %>
-    <p>
-      <%= student.name %>
-    </p>
+ <!-- <h3>teachers show</h3> -->
 
+<table class="table">
+  <tr>
+    <th><h2>Students</h2></th>
+    <th><h2>Attendance</h2></th>
+  </tr>
+  <% @activities_students.each do |activity| %>
+  <tr>
+    <td><%= activity.student.name %></td> 
+    <td><%= activity.attendance %></td> 
+  </tr><br>
   <% end %>
-<% end %> -->
+</table>
