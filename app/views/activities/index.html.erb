@@ -20,8 +20,6 @@
           <th>Permission Slip?</th>
           <% if @current_teacher.present? %>
             <th>View Activity</th>
-            <th>Edit Activity</th>
-            <th>Delete Activity</th>
           <% end %>
           <% if @current_student.present? %>
             <th>View Activity</th>
@@ -35,7 +33,7 @@
               <td><%= activity.start %></td>
               <td><%= activity.end %></td>
               <td><%= activity.location %></td>
-              <td style="text-align: center;">  
+              <td style="text-align: center;">
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
@@ -47,16 +45,6 @@
                   <%= link_to activity_path(activity), class: "btn btn-primary" do %>
                     <i class="glyphicon glyphicon-eye-open"></i>
                   <% end %>
-                </td>
-                <td>
-                  <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  <% end if activity.teacher_id == @current_teacher.id %>
-                </td>
-                <td>
-                  <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
-                    <i class="glyphicon glyphicon-trash"></i>
-                  <% end if activity.teacher_id == @current_teacher.id %>
                 </td>
               <% end %>
               <% if @current_student.present?  %>

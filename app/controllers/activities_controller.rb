@@ -55,7 +55,7 @@ class ActivitiesController < ApplicationController
     if @activity.destroy
       redirect_to activities_path
     else
-       flash[:notice] = "Something went wrong Data not deleted"
+       flash[:success] = "Something went wrong Data not deleted"
     end
   end
 
@@ -66,7 +66,7 @@ class ActivitiesController < ApplicationController
     present = present == 1 ? 0 : 1
     ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
 
-    flash[:notice] = "#{@student.name} confirmed at the event."
+    flash[:success] = "#{@student.name} confirmed at the event."
     redirect_to :back
   end
 
@@ -74,9 +74,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find params[:activity_id]
     if @activity.students.exists? @current_student.id
       @activity.students.delete(@current_student)
-      flash[:notice] = "You have removed yourself from the event."
+      flash[:success] = "You have removed yourself from the event."
     else
-      flash[:notice] = "You have signed up for the event"
+      flash[:success] = "You have signed up for the event"
       @activity.students << @current_student
     end
 
@@ -86,7 +86,7 @@ class ActivitiesController < ApplicationController
   def attendance
     @activity = Activity.find params[:id]
     @activity.students.update_attributes(:attendance, 1)
-    flash[:notice] = "attendance taken"
+    flash[:success] = "attendance taken"
     redirect_to teacher_path
 #       <input type="checkbox" id="post_validate" name="post[validated]"
 #                                    value="1" checked="checked" />
@@ -103,8 +103,6 @@ class ActivitiesController < ApplicationController
   def choose_students
     activity_id = params[:activity_id]
     @students = Student.all
-    # @students = Student.without_activity_enrollment(activity_id)
-    # binding.pry
   end
 
   def remove_student
@@ -112,7 +110,7 @@ class ActivitiesController < ApplicationController
     @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
 
     if @activities_student.destroy
-      flash[:notice] = 'Student successfully removed!'
+      flash[:success] = 'Student successfully removed!'
       return redirect_to :back
     else
       flash[:warning] = 'Unenrollment failed!'
@@ -127,8 +125,8 @@ class ActivitiesController < ApplicationController
                                       student_id: @student_id)
 
     if enrollment.save
-      flash[:notice] = 'Student successfully added!'
-      return redirect_to :back
+      flash[:success] = 'Student successfully added!'
+      return redirect_to choose_students_path(params[:activity_id])
     else
       flash[:warning] = 'Enrollment failed!'
       render :choose_students

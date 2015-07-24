@@ -5,9 +5,10 @@
         <div class="col-md-12">
         <h3><%= @activity.name %></h3>
          <% if (@activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date) || ( @activity.start.to_date > Time.now.to_date) %>
-          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
+          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" if @current_teacher.present? %>
+          <%= link_to "Sign up!", student_sign_up_path(@activity), :class => "btn btn-primary" if @current_student.present? %>
           <br>
-        <% end %>
+        <% end%>
         </div>
       </div> <!-- /row -->
       <div class="row">
@@ -47,13 +48,6 @@
                       <%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %>
                     </td>
                   <% end %>
-                    <td>
-                      <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
-                        <input value="1" name="attendance" type="checkbox" checked/>
-                      <% else %>
-                        <input value="1" name="attendance" type="checkbox"/>
-                      <% end %>
-                    </td>
                   </tr>
                 <% end %>
               </table>
