@@ -1,78 +1,30 @@
-<div class="container">
-  <div class="row">
-    <h1 class="page-header text-center">Activities</h1>
-      <% if @current_teacher.present? %>
-        <p align="right">Add New activity
-        <br />
-        <%= link_to new_activity_path, class: "btn btn-success" do %>
-        <i class="glyphicon glyphicon-plus"></i>
-        <% end %>
+  <%#= Date.today + 1%>
+    <% @activities.each do |activity| %>
+      <% if activity.start.to_date > Time.now.to_date %>
+        <!-- Future activity -->
+        <h2>Future</h2>
+        <%= activity.name %> 
+        <%= activity.start %> 
+        <%= activity.end%> 
+        <br>
+        
+      <% elsif activity.start.to_date <= Date.today.to_date && activity.end.to_date >= Date.today.to_date %>
+        <!-- Current activity  -->
+        <h2>Current</h2>
+        <%= activity.name %> 
+        <%= activity.start %> 
+        <%= activity.end%> 
+        <br>
+
+      <% elsif activity.end.to_date < Date.today.to_date %>
+        <!-- Completed activity -->
+        <h2>Completed</h2>
+        <%= activity.name %> 
+        <%= activity.start %> 
+        <%= activity.end%> 
+        <br>
+      <% else %>
+        <h2>Didn't work</h2>
       <% end %>
-    </p>
-
-    <table class="table table-hover">
-      <tr>
-        <th>Activity Name</th>
-        <th>Start Date</th>
-        <th>End Date</th>
-        <th>Permission Slip?</th>
-        <% if @current_teacher.present? %>
-          <th>View Activity</th>
-          <th>Edit Activity</th>
-          <th>Delete Activity</th>
-        <% end %>
-        <% if @current_student.present? %>
-          <th>Sign Up?</th>
-        <% end %>
-      </tr>
-      <% @activities.each do |activity| %>
-       <tr>
-          <td>  <%= activity.name %> </td>
-          <td>  <%= activity.start %> </td>
-          <td>  <%= activity.end%> </td>
-          <td style="text-align: center;">  <% if activity.permission_slip %>
-              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                <% else %>
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                <% end %>
-          </td>
-
-          <% if @current_teacher.present? %>
-            <td>
-              <%= link_to activity_path(activity), class: "btn btn-primary" do %>
-                <i class="glyphicon glyphicon-eye-open"></i>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
-                <i class="glyphicon glyphicon-pencil"></i>
-              <% end %>
-            </td>
-            <td>
-              <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
-                <i class="glyphicon glyphicon-trash"></i>
-              <% end %>
-            </td>
-          <% end %>
-          <% if @current_student.present?  %>
-            <% attending = activity.students.exists? @current_student.id %>
-            <% end %>
-          <% if @current_student.present? %>
-            <td>
-              <% if attending %>
-                <%= link_to student_sign_up_path(activity), class: "btn btn-danger" do %>
-                  <i class="glyphicon glyphicon-trash"></i>
-                <% end %>
-              <% else %>
-                <%= link_to student_sign_up_path(activity), class: "btn btn-primary" do %>
-                  <i class="glyphicon glyphicon-pencil"></i>
-                <% end %>
-              <% end %>
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-
-  </div>
-</div>
+    <% end %>
+     
