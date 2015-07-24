@@ -12,7 +12,7 @@ class StudentsController < ApplicationController
   	   u.skip_invitation = false
   	end
 
-    flash[:notice] = "Invitation has been sent!"
+    flash[:success] = "Invitation has been sent!"
     redirect_to :back
 
   end
