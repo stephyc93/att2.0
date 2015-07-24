@@ -142,7 +142,7 @@ class ActivitiesController < ApplicationController
     end
 
     def activity_params
-      params.require(:activity).permit(:name, :start, :end, :permission_slip, :attendance)
+      params.require(:activity).permit(:name, :start, :end, :permission_slip, :location, :attendance)
     end
 
 end
