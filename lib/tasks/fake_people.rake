@@ -64,11 +64,12 @@ namespace :db do
         5.times do |n|
         puts "[DEBUG] creating activity #{n+1} of 20"
         name = Faker::Company.catch_phrase
-        date = DateTime.now + rand(20)
+        datestart = Time.now.utc + rand(20)
+        dateend = datestart + 10*60*20
         parent = '1'
         Activity.create!( name: name,
-                      start: date,
-                      end: date + 1,
+                      start: datestart,
+                      end: dateend,
                       location: address.sample,
                       permission_slip: [0, 1].sample,
                       teacher_id: teacher.first.id)
