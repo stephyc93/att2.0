@@ -65,7 +65,6 @@ class ActivitiesController < ApplicationController
     present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.first.to_i
     present = present == 1 ? 0 : 1
     ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
-
     flash[:success] = "#{@student.name} confirmed at the event."
     redirect_to :back
   end
@@ -88,21 +87,30 @@ class ActivitiesController < ApplicationController
     @activity.students.update_attributes(:attendance, 1)
     flash[:success] = "attendance taken"
     redirect_to teacher_path
-#       <input type="checkbox" id="post_validate" name="post[validated]"
-#                                    value="1" checked="checked" />
-# <input name="post[validated]" type="hidden" value="0" />
-
-#       <input type="hidden"   name="model[attr]" value="0" />
-# <input type="checkbox" name="model[attr]" value="1" />
-
-# <%= hidden_field_tag 'model_name[column_name]', '0' %>
-# <%= check_box_tag 'model_name[column_name]', 1, (@data.model_name.column_name == 1 ? true : false) %>
-
   end
 
   def choose_students
     activity_id = params[:activity_id]
     @students = Student.all
+  end
+
+  def add_student
+    @student_id = params[:student_id]
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id],
+                                      student_id: @student_id)
+
+    if enrollment.save
+      flash[:success] = 'Student successfully added!'
+      # return redirect_to choose_students_path(params[:activity_id])
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    else
+      flash[:warning] = 'Enrollment failed!'
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    end
   end
 
   def remove_student
@@ -111,29 +119,16 @@ class ActivitiesController < ApplicationController
 
     if @activities_student.destroy
       flash[:success] = 'Student successfully removed!'
-      return redirect_to :back
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
     else
       flash[:warning] = 'Unenrollment failed!'
-      render :choose_students
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
     end
   end
-
-  def add_student
-
-    @student_id = params[:student_id]
-    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id],
-                                      student_id: @student_id)
-
-    if enrollment.save
-      flash[:success] = 'Student successfully added!'
-      return redirect_to choose_students_path(params[:activity_id])
-    else
-      flash[:warning] = 'Enrollment failed!'
-      render :choose_students
-    end
-  end
-
-
 
   private
 
