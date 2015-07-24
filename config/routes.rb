@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :parents
 
+  get 'welcome/about_this_app' => 'welcome#app', as: :about_app
+
   post 'students/invite' => 'students#invite', as: :invite_student
 
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
