@@ -1,24 +1,89 @@
 <h1>Students#index</h1>
 <h3>My Current Activities</h3>
-<% @current_student.activities.each do |myactivity| %>
-  <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>  
-    <%= myactivity.name %><br>
-  <% end %>
-<% end %>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+    </tr>
+    <% @current_student.activities.each do |myactivity| %>
+      <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %> 
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
 
-<h3>My Future Activities</h3>
-<% @current_student.activities.each do |myactivity| %>
-  <% if myactivity.start.to_date > Time.now.to_date %>   
-    <%= myactivity.name %><br>
-  <% end %>
-<% end %>
 
-<h3>My completed Activities</h3>
-<% @current_student.activities.each do |myactivity| %>
-  <% if myactivity.end.to_date < Date.today.to_date %>  
-    <%= myactivity.name %><br>
-  <% end %>
-<% end %>
+<h3>My Up Coming Activities</h3>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+    </tr>
+    <% @current_student.activities.each do |myactivity| %>
+      <% if myactivity.start.to_date > Time.now.to_date %>
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
+
+
+<h3>Activities Completed</h3>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+    </tr>
+    <% @current_student.activities.each do |myactivity| %>
+       <% if myactivity.end.to_date < Date.today.to_date %>  
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
 
 
    
