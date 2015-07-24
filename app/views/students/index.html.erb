@@ -1,13 +1,24 @@
 <h1>Students#index</h1>
-<!-- <table>
-  <% @students.each do |student| %>
-  <tr>
-    <td>
-      <input name="post[validated]" type="hidden" value="0" />
-      <input checked="checked" type="checkbox" id="post_validated" name="post[validated]" value="1" />
-    </td>
-    <td><%= student.name %></td>
-    <td><%= student.phone %></td>
-  </tr>
+<h3>My Current Activities</h3>
+<% @current_student.activities.each do |myactivity| %>
+  <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>  
+    <%= myactivity.name %><br>
   <% end %>
-</table> -->
+<% end %>
+
+<h3>My Future Activities</h3>
+<% @current_student.activities.each do |myactivity| %>
+  <% if myactivity.start.to_date > Time.now.to_date %>   
+    <%= myactivity.name %><br>
+  <% end %>
+<% end %>
+
+<h3>My completed Activities</h3>
+<% @current_student.activities.each do |myactivity| %>
+  <% if myactivity.end.to_date < Date.today.to_date %>  
+    <%= myactivity.name %><br>
+  <% end %>
+<% end %>
+
+
+   
