@@ -1,6 +1,12 @@
-.home-body , .About-Me{
+.application-body{
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
+}
+/*well for sign in*/
+.well {
+  height: 230px;
+  width: 200px;
+
 }
 
 #h1 {
