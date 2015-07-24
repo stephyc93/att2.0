@@ -49,6 +49,14 @@ namespace :db do
   end
 
   task fake_activities: :environment do
+    address = []
+    address[0] = '222 S Main ST, Salt Lake City, UT 84101'
+    address[1] = '175 200 South, Salt Lake City, UT 84101'
+    address[2] = '3003 Thanksgiving Way, Lehi, UT 84043'
+    address[3] = '3740 13400 S, Riverton, UT 84065'
+    address[4] = '231 400 South, Salt Lake City, UT 84111'
+    address[5] = '4315 South 2700 West, Salt Lake City, UT 84184'
+
     User.all.each do |user|
       teacher = Teacher.where :user_id => user.id
       if teacher.present?
@@ -61,6 +69,8 @@ namespace :db do
         Activity.create!( name: name,
                       start: date,
                       end: date + 1,
+                      location: address.sample,
+                      permission_slip: [0, 1].sample,
                       teacher_id: teacher.first.id)
         end # 5.times
       end # user.present?
