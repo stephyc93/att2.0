@@ -10,28 +10,31 @@
       <table class="table">
         <tr>
           <th><h3>Students</h3></th>
-          <th><h3><%= Date.today %></h3></th>
-          <th><h3>Attendance</h3></th>
+          <% if @activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date %>
+            <th><h3><%= Date.today %></h3></th>
+            <th><h3>Attendance</h3></th>
+          <% end %>
         </tr>
         <% @activity.students.each do |student| %>
-        <br>
-        <tr>
-          <td><%= student.name %></td>
-          <td>
-            <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
-              <input value="1" name="attendance" type="checkbox" checked/>
-            <% else %>
-              <input value="1" name="attendance" type="checkbox"/>
+          <br>
+          <tr>
+            <td><%= student.name %></td>
+            <% if @activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date %>
+              <td>
+                <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
+                  <input value="1" name="attendance" type="checkbox" checked/>
+                <% else %>
+                  <input value="1" name="attendance" type="checkbox"/>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %>
+              </td>
             <% end %>
-          </td>
-          <td><%= link_to "Save Attendance", activity_attendance_path(@activity.id, student.id), :class => "btn btn-success" %></td>
-        </tr>
+          </tr> 
         <% end %>
       </table>
     </div>
-
-
-
   </div>
   <br>
 </div>
