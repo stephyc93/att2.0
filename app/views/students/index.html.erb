@@ -1,7 +1,7 @@
 <h1>Students#index</h1>
 <h3>My Current Activities</h3>
 <% @current_student.activities.each do |myactivity| %>
-  <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>    
+  <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>  
     <%= myactivity.name %><br>
   <% end %>
 <% end %>
