@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722134933) do
+ActiveRecord::Schema.define(version: 20150724211445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activies_students", id: false, force: :cascade do |t|
+    t.integer "activity_id"
+    t.integer "student_id"
+    t.integer "present"
+  end
+
+  add_index "activies_students", ["activity_id"], name: "index_activies_students_on_activity_id", using: :btree
+  add_index "activies_students", ["student_id"], name: "index_activies_students_on_student_id", using: :btree
 
   create_table "activities", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +32,9 @@ ActiveRecord::Schema.define(version: 20150722134933) do
     t.string   "location"
     t.integer  "permission_slip"
     t.integer  "teacher_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.text     "description"
   end
 
   create_table "activities_students", force: :cascade do |t|

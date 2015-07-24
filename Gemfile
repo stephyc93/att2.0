@@ -14,6 +14,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'faker', '~> 1.4.3'
 
+gem 'geocoder'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

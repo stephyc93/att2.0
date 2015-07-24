@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  
+
   require 'time'
 
   before_action :find_activity, only:[:show, :edit, :update, :destroy, :attendance]
@@ -16,6 +16,7 @@ class ActivitiesController < ApplicationController
     params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
     params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     params[:activity][:permission_slip] = params[:permission_slip]
+    params[:activity][:teacher_id] = @current_teacher.id
 
     if params[:activity][:end] < params[:activity][:start]
       flash[:warning] = "You can't have an end date before a start date."
@@ -42,6 +43,7 @@ class ActivitiesController < ApplicationController
     params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
     params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     params[:activity][:permission_slip] = params[:permission_slip]
+    params[:activity][:teacher_id] = @current_teacher.id
     if @activity.update(activity_params)
       redirect_to activities_path
     else
@@ -142,7 +144,7 @@ class ActivitiesController < ApplicationController
     end
 
     def activity_params
-      params.require(:activity).permit(:name, :start, :end, :permission_slip, :location, :attendance)
+      params.require(:activity).permit(:name, :start, :end, :permission_slip, :location, :description, :teacher_id, :attendance)
     end
 
 end
