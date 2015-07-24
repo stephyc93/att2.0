@@ -2,6 +2,10 @@
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
 }
+
+.container {
+    background-color: #fff;
+}
 /*well for sign in*/
 .well {
   height: 230px;
