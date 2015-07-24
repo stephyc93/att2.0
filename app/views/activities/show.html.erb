@@ -3,9 +3,10 @@
     <h1 class="page-header text-center">Show Activity</h1>
     <div>
       <h3><%= @activity.name %></h3>
-      <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
-      <%= link_to "Delete Activity", activity_path(@activity.id), :class => "btn btn-danger", method: :delete %>
-      <%= link_to "Edit Activity", edit_activity_path(@activity.id), :class => "btn btn-info" %>
+      <% if (@activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date) || ( @activity.start.to_date > Time.now.to_date) %>
+        <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
+        <br>
+      <% end %>
       <table class="table">
         <tr>
           <th><h3>Students</h3></th>
