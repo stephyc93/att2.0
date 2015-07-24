@@ -7,7 +7,7 @@
          <% if (@activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date) || ( @activity.start.to_date > Time.now.to_date) %>
           <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" %>
           <br>
-        <% end %>
+        <% end if @current_teacher.present? %>
         </div>
       </div> <!-- /row -->
       <div class="row">
