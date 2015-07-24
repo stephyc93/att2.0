@@ -30,11 +30,12 @@
           <td>  <%= activity.name %> </td>
           <td>  <%= activity.start %> </td>
           <td>  <%= activity.end%> </td>
-          <td style="text-align: center;">  <% if activity.permission_slip %>
+          <td style="text-align: center;">
+            <% if activity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                <% else %>
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                <% end %>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
           </td>
 
           <% if @current_teacher.present? %>

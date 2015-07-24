@@ -23,18 +23,11 @@
       <li role="presentation"><a href="/users/sign_in">Login</a></li>
     <% else %>
       <li role="presentation">
-      <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
-      <%= link_to_if(current_user.student?, "Students", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
-      <%= link_to_if(current_user.parent?, "Parents", { controller: "parents", action: "index" }) unless current_user.teacher? || current_user.student?  %>
-      </li>
-
-      <li role="presentation">
-      <%= link_to_if(current_user.teacher?, "Attendance", { controller: "teachers", action: "show", id: current_user.id }) unless current_user.student? || current_user.parent? %>
-      <%= link_to_if(current_user.student?, "Attendance", { controller: "students", action: "show", id: current_user.id })  unless current_user.teacher? || current_user.parent? %>
-      <%= link_to_if(current_user.parent?, "Attendance", { controller: "parents", action: "show", id: current_user.id }) unless current_user.teacher? || current_user.student?  %>
+        <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
+        <%= link_to_if(current_user.student?, "Students", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
+        <%= link_to_if(current_user.parent?, "Parents", { controller: "parents", action: "index" }) unless current_user.teacher? || current_user.student?  %>
       </li>
       <li>
-
         <%= link_to_if(current_user.teacher? || current_user.student?, "Activities", { controller: "activities", action: "index", id: current_user.id }) unless current_user.parent?  %>
       </li>
 
@@ -46,7 +39,7 @@
 <body>
   <div class="container">
     <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "alert alert-info" %>
+      <%= content_tag :div, msg, class: "alert alert-#{name}" %>
     <% end %>
 
     <%= yield %>
