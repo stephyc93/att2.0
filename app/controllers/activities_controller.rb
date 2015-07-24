@@ -15,6 +15,13 @@ class ActivitiesController < ApplicationController
   def create
     params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
     params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
+    params[:activity][:permission_slip] = params[:permission_slip]
+
+    if params[:activity][:end] < params[:activity][:start]
+      flash[:warning] = "You can't have an end date before a start date."
+      return redirect_to :back
+
+    end
     @activity = Activity.new(activity_params)
 
     if @activity.save
@@ -34,6 +41,7 @@ class ActivitiesController < ApplicationController
   def update
     params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
     params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
+    params[:activity][:permission_slip] = params[:permission_slip]
     if @activity.update(activity_params)
       redirect_to activities_path
     else
@@ -100,12 +108,10 @@ class ActivitiesController < ApplicationController
   def remove_student
     @student_id = params[:student_id]
     @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
-    
+
     if @activities_student.destroy
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      flash[:notice] = 'Student successfully removed!'
+      return redirect_to :back
     else
       flash[:warning] = 'Unenrollment failed!'
       render :choose_students
@@ -113,16 +119,14 @@ class ActivitiesController < ApplicationController
   end
 
   def add_student
-    # byebug
+
     @student_id = params[:student_id]
-    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id], 
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id],
                                       student_id: @student_id)
 
     if enrollment.save
-      respond_to do |format|
-        format.html
-        format.js
-      end
+      flash[:notice] = 'Student successfully added!'
+      return redirect_to :back
     else
       flash[:warning] = 'Enrollment failed!'
       render :choose_students

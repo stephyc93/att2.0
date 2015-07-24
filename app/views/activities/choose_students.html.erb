@@ -3,7 +3,6 @@
     <th colspan="2"><h2> Enroll Students</h2></th>
   </tr>
   <% @students.each do |student| %>
-    <div id='<%= student.id %>' >
       <tr>
         <td>
           <strong><%= student.name %></strong>
@@ -16,8 +15,6 @@
           <% end %>
         </td>
       </tr>
-    </div>
-    <br>
   <% end %>
 </table>
 
