@@ -16,6 +16,7 @@
           <th>Activity Name</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th>Location</th>
           <th>Permission Slip?</th>
           <% if @current_teacher.present? %>
             <th>View Activity</th>
@@ -32,6 +33,7 @@
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
               <td><%= activity.end %></td>
+              <td><%= activity.location %></td>
               <td style="text-align: center;">  
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -83,6 +85,7 @@
           <th>Activity Name</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th>Location</th>
           <th>Permission Slip?</th>
             <% if @current_teacher.present? %>
               <th>View Activity</th>
@@ -95,11 +98,12 @@
           </tr>
           <% @activities.each do |activity| %>
             <% if activity.start.to_date > Time.now.to_date %>
-        <!-- Current activity  -->
+        <!-- Future activity  -->
             <tr>
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
               <td><%= activity.end %></td>
+              <td><%= activity.location %></td>
               <td style="text-align: center;">  
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -153,6 +157,7 @@
           <th>Activity Name</th>
           <th>Start Date</th>
           <th>End Date</th>
+          <th>Location</th>
           <th>Permission Slip?</th>
             <% if @current_teacher.present? %>
               <th>View Activity</th>
@@ -165,6 +170,7 @@
                 <td><%= activity.name %></td>
                 <td><%= activity.start %></td>
                 <td><%= activity.end %></td>
+                <td><%= activity.location %></td>
                 <td style="text-align: center;">  
                   <% if activity.permission_slip %>
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
