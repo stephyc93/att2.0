@@ -5,6 +5,7 @@ class StudentsController < ApplicationController
   end
 
   def show
+    @activity = ActivitiesStudent.where(student_id: @current_student.id)
   end
 
   def invite
