@@ -8,4 +8,7 @@ class TeachersController < ApplicationController
     @activities_students = Activity.last.activities_students
     @student = Student.all
   end
+
+  def invite_student
+  end
 end
