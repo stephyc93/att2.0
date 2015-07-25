@@ -6,7 +6,9 @@ class ActivitiesController < ApplicationController
 
   def index
     @activities = Activity.all
-    
+    @locations = @activities.where("start > ?", DateTime.now.beginning_of_month).map do |u|
+      { :lat => u.latitude, :lng => u.longitude, :infowindow => "<b>" + u.name + "</b> <br/>" + u.location }
+    end
   end
 
   def new
@@ -58,6 +60,15 @@ class ActivitiesController < ApplicationController
     else
        flash[:success] = "Something went wrong Data not deleted"
     end
+  end
+
+  def activities_gmap
+    @activities = Activity.all
+    @json = @activities.to_gmaps4rails do |ride, marker|
+      marker.infowindow "<b>" + ride.name + "</b> <br/>" + ride.location
+      marker.title "#{ride.location}"
+    end
+    respond_with @json
   end
 
   def confirmAttendance

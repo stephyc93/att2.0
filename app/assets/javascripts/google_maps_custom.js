@@ -9,7 +9,7 @@ function gmap_show(company) {
       {
         "lat": company.lat,    // coordinates from parameter company
         "lng": company.lng,
-        "infowindow": "<b>" + company.name + "</b> " + company.location
+        "infowindow": "<b>" + company.name + "</b> <br/>" + company.location
       }
     ]);
     handler.bounds.extendWith(markers);

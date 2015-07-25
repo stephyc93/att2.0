@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post 'students/invite' => 'students#invite', as: :invite_student
 
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
+  get 'activities/activities_gmap' => 'activities#activities_gmap'
 
   get 'activities/:activity_id/add_student' => 'activities#add_student', as: :add_student
   get 'activities/:activity_id/remove_student' => 'activities#remove_student', as: :remove_student

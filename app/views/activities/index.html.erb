@@ -1,15 +1,21 @@
-<div class="container">
   <div class="row">
-    <h1 class="page-header text-center">Activities
-      <%= link_to new_activity_path, class: "btn btn-success" do %>
-        <i class="glyphicon glyphicon-plus"></i>
-      <% end %>
-      <p align="right">
-      </p></h1>
-    <% if @current_teacher.present? %>
-    <% end %>
+    <div class="col-md-12">
+      <h1 class="page-header text-center">Activities
+        <%= link_to new_activity_path, class: "btn btn-success" do %>
+          <i class="glyphicon glyphicon-plus"></i>
+        <% end %>
+        <p align="right">
+        </p></h1>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+        <div id="map" style="width: 100%; height: 350px;"></div>
+      </div> <!-- /col-md-12 -->
+  </div> <!-- /row -->
 
-    <h2> Current event </h2>
+  <div class="row">
+    <h2>Current event </h2>
       <table class="table table-hover table-responsive">
         <tr>
           <th>Activity Name</th>
@@ -71,8 +77,9 @@
           <% end %>
         <% end %>
       </table>
-
-    <h2> Future event </h2>
+  </div><!-- /current event -->
+  <div class="row">
+  <h2>Future event </h2>
       <table class="table table-hover">
         <tr>
           <th>Activity Name</th>
@@ -141,8 +148,9 @@
           <% end %>
         <% end %>
       </table>
-
-    <h2> Completed event </h2>
+  </div><!-- /future event -->
+  <div class="row">
+    <h2>Completed event </h2>
       <table class="table table-hover">
         <tr>
           <th>Activity Name</th>
@@ -183,18 +191,48 @@
           <% end %>
         <% end %>
       </table>
-  </div>
-</div>
-<<<<<<< HEAD
+  </div> <!-- /completed event -->
 
 <% content_for :javascripts do %>
-  <script type='text/javascript'>
-      handler = Gmaps.build('Google');
-      $(document).ready(function(){
-        var activity = {"name": "<%= @activity.name %>", "lat": "<%= @activity.latitude %>", "lng": "<%= @activity.longitude %>", "location": "<%= @activity.location %>" }  // pass ruby variable to javascript
-        gmap_show(activity);    // init show map for company card (only print marker)
+  <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    jQuery(document).ready(function() {
+        var locations_json = <%=raw @locations.to_json %>
+      handler = Gmaps.build('Google', { markers: { maxRandomDistance: null } });
+      handler.buildMap({ provider: {}, internal: {id: 'map'}, list_container: "markers_list"}, function(){
+        markers = handler.addMarkers(locations_json);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(12);
+
+        _.each(locations_json, function(json, index){
+            json.marker = markers[index];
+          });
+
+          createSidebar(locations_json);
       });
+
+
+      function createSidebarLi(json){
+          return ("<li><a>" + json.name + "</a></li>");
+        };
+
+        function bindLiToMarker($li, marker){
+          $li.on('click', function(){
+            handler.getMap().setZoom(14);
+            marker.setMap(handler.getMap());
+            marker.panTo();
+            google.maps.event.trigger(marker.getServiceObject(), 'click');
+          })
+        };
+
+        function createSidebar(json_array){
+          _.each(locations_json, function(json){
+            var $li = $( createSidebarLi(json) );
+            $li.appendTo('#markers_list');
+            bindLiToMarker($li, json.marker);
+          });
+        };
+    });
   </script>
-<% end %>
-=======
->>>>>>> origin
+<%end%>
