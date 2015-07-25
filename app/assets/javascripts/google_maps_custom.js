@@ -9,11 +9,6 @@ function gmap_show(company) {
       {
         "lat": company.lat,    // coordinates from parameter company
         "lng": company.lng,
-        // "picture": {    // setup marker icon
-        //   "url": 'https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png',
-        //   "width":  32,
-        //   "height": 32
-        // },
         "infowindow": "<b>" + company.name + "</b> " + company.location
       }
     ]);

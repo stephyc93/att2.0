@@ -188,3 +188,13 @@
         </table>
   </div>
 </div>
+
+<% content_for :javascripts do %>
+  <script type='text/javascript'>
+      handler = Gmaps.build('Google');
+      $(document).ready(function(){
+        var activity = {"name": "<%= @activity.name %>", "lat": "<%= @activity.latitude %>", "lng": "<%= @activity.longitude %>", "location": "<%= @activity.location %>" }  // pass ruby variable to javascript
+        gmap_show(activity);    // init show map for company card (only print marker)
+      });
+  </script>
+<% end %>
