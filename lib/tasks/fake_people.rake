@@ -1,5 +1,4 @@
 require 'faker'
-require 'byebug'
 
 namespace :db do
   desc "Fill database with sample data"

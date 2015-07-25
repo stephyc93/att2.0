@@ -1,8 +1,10 @@
   <div class="row">
     <div class="col-md-12">
       <h1 class="page-header text-center">Activities
-        <%= link_to new_activity_path, class: "btn btn-success" do %>
-          <i class="glyphicon glyphicon-plus"></i>
+        <% if current_user.teacher? %>
+          <%= link_to new_activity_path, class: "btn btn-success" do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
         <% end %>
         <p align="right">
         </p></h1>
@@ -14,13 +16,13 @@
       </div> <!-- /col-md-12 -->
   </div> <!-- /row -->
 
-  <div class="row">
+  <div class="row visible-md-block">
     <h2>Current event </h2>
       <table class="table table-hover table-responsive">
         <tr>
           <th>Activity Name</th>
           <th>Start Date</th>
-          <th>End Date</th>
+          <th class="hidden-md">End Date</th>
           <th>Location</th>
           <th>Permission Slip?</th>
           <% if @current_teacher.present? %>
@@ -36,7 +38,7 @@
             <tr>
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
-              <td><%= activity.end %></td>
+              <td class="hidden-md"><%= activity.end %></td>
               <td><%= activity.location %></td>
               <td style="text-align: center;">
                 <% if activity.permission_slip %>
@@ -78,8 +80,8 @@
         <% end %>
       </table>
   </div><!-- /current event -->
-  <div class="row">
-  <h2>Future event </h2>
+  <div class="row  visible-md-block">
+    <h2>Future event </h2>
       <table class="table table-hover">
         <tr>
           <th>Activity Name</th>
@@ -125,7 +127,7 @@
                 <td>
                   <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
                     <i class="glyphicon glyphicon-trash"></i>
-                  <% end %> 
+                  <% end %>
                 </td> -->
               <% end %>
               <% if @current_student.present?  %>
@@ -149,7 +151,7 @@
         <% end %>
       </table>
   </div><!-- /future event -->
-  <div class="row">
+  <div class="row visible-md-block">
     <h2>Completed event </h2>
       <table class="table table-hover">
         <tr>
@@ -192,6 +194,23 @@
         <% end %>
       </table>
   </div> <!-- /completed event -->
+
+  <!-- This div is for mobile responsive on smaller devices -->
+  <br />
+<div class="row visible-sm-block visible-xs-block">
+  <div class="col-sm-12">
+    <% @activities.each do |activity| %>
+      <% if activity.start.to_date <= Date.today.to_date && activity.end.to_date >= Date.today.to_date %>
+        <%= link_to activity_path(activity), class: "btn btn-default" do %>
+          <td><%= activity.name %></td>
+          <br />
+          <td><%= activity.start %></td>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
 
 <% content_for :javascripts do %>
   <script type="text/javascript">
