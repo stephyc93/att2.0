@@ -13,16 +13,25 @@ Rails.application.routes.draw do
 
   resources :activities
 
+  match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all
   resources :teachers
 
+  post 'students/invite' => 'students#invite'
   resources :students
 
   resources :parents
 
   get 'welcome/about_this_app' => 'welcome#app', as: :about_app
 
-  post 'students/invite' => 'students#invite', as: :invite_student
+  get 'welcome/darren_about' => 'welcome#darren_about', as: :darren_about
 
+  get 'welcome/sabina_about' => 'welcome#sabina_about', as: :sabina_about
+
+  get 'welcome/tyler_about' => 'welcome#tyler_about', as: :tyler_about
+
+  get 'welcome/steph_about' => 'welcome#steph_about', as: :steph_about
+
+  
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
   get 'activities/activities_gmap' => 'activities#activities_gmap'
 

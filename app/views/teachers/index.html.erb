@@ -1,26 +1,129 @@
-<div class="row">
-<div class="col-md-12"><h1>Welcome <%= current_user.fullname %> </h1></div>
-</div>
+<h1>Teachers#index</h1>
+<h3>My Current Activities</h3>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+      <th>Show Activity</th>
+      <th>Edit Activity</th>
+      <th>Delete</th>
+    </tr>
+    <% @current_teacher.activities.each do |myactivity| %>
+      <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %> 
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activity_path(myactivity), class: "btn btn-primary" do %>
+              <i class="glyphicon glyphicon-eye-open"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
+              <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
+              <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
+  <br>
+  <br>
 
-<div class="row">
-	<div class="col-md-6">
-		<% if current_user.teacher? %>
-			<div class="row">
-				<div class="col-md-12">
-					<%= form_tag("/students/invite", method: "post") do %>
-						<label>Invite a Student!</label>
-						<div class="form-group">
-							<label for="name">Student Name</label>
-							<input name="name" type="text" class="form-control" id="name" placeholder="Student Name">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email address</label>
-							<input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-						</div>
-						<button type="submit" class="btn btn-default">Invite Student</button>
-					<% end %>
-				</div>
-			</div>
-		<% end %>
-	</div>
-</div>
+
+<h3>My Up Coming Activities</h3>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+      <th>Show Activity</th>
+      <th>Edit Activity</th>
+      <th>Delete</th>
+    </tr>
+    <% @current_teacher.activities.each do |myactivity| %>
+      <% if myactivity.start.to_date > Time.now.to_date %>
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activity_path(myactivity), class: "btn btn-primary" do %>
+              <i class="glyphicon glyphicon-eye-open"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
+              <i class="glyphicon glyphicon-pencil"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
+              <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
+  <br>
+  <br>
+
+
+<h3>Activities Completed</h3>
+  <table class="table">
+    <tr>
+      <th>Activity Name</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Location</th>
+      <th>Permission Slip</th>
+    </tr>
+    <% @current_teacher.activities.each do |myactivity| %>
+       <% if myactivity.end.to_date < Date.today.to_date %>  
+        <tr>
+          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.start %></td>
+          <td><%= myactivity.end %></td>
+          <td><%= myactivity.location %></td>
+          <td style="text-align: center;">  
+            <% if myactivity.permission_slip %>
+              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+        </tr> 
+      <% end %>
+    <% end %>
+  </table>
+
+
+   
