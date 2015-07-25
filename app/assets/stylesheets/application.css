@@ -15,16 +15,9 @@
  *= require bootstrap-datetimepicker
  */
 
-.application-body, .no-padding{
+.application-body, .no-padding {
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
-}
-
-/*well for sign in*/
-.well {
-  height: 230px;
-  width: 200px;
-
 }
 
 #h1 {
