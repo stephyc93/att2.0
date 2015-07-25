@@ -7,7 +7,9 @@ class ActivitiesController < ApplicationController
   def index
     @activities = Activity.all
     @locations = @activities.where("start > ?", DateTime.now.beginning_of_month).map do |u|
-      { :lat => u.latitude, :lng => u.longitude, :infowindow => "<b>" + u.name + "</b> <br/>" + u.location }
+      if u.name.present? && u.location.present?
+        { :lat => u.latitude, :lng => u.longitude, :infowindow => "<b>" + u.name + "</b> <br/>" + u.location }
+      end
     end
   end
 
