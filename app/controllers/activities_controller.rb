@@ -7,7 +7,9 @@ class ActivitiesController < ApplicationController
   def index
     @activities = Activity.all
     @locations = @activities.where("start > ?", DateTime.now.beginning_of_month).map do |u|
-      { :lat => u.latitude, :lng => u.longitude, :infowindow => "<b>" + u.name + "</b> <br/>" + u.location }
+      if u.name.present? && u.location.present?
+        { :lat => u.latitude, :lng => u.longitude, :infowindow => "<b>" + u.name + "</b> <br/>" + u.location }
+      end
     end
   end
 
@@ -16,16 +18,26 @@ class ActivitiesController < ApplicationController
   end
 
   def create
+
+    if params[:activity][:end] < params[:activity][:start]
+      flash[:warning] = "You can't have an end date before a start date."
+      return redirect_to :back
+    end
+
+    if params[:activity][:end].blank? || params[:activity][:start].blank?
+      flash[:warning] = "You must provide a start and end date."
+      return redirect_to :back
+    end
+
+    if params[:activity][:location].blank? || params[:activity][:name].blank?
+      flash[:warning] = "All fields are required."
+      return redirect_to :back
+    end
     params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
     params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     params[:activity][:permission_slip] = params[:permission_slip]
     params[:activity][:teacher_id] = @current_teacher.id
 
-    if params[:activity][:end] < params[:activity][:start]
-      flash[:warning] = "You can't have an end date before a start date."
-      return redirect_to :back
-
-    end
     @activity = Activity.new(activity_params)
 
     if @activity.save
