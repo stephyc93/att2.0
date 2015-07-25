@@ -53,11 +53,13 @@
           <li>
             <%= link_to_if(current_user.teacher? || current_user.student?, "Activities", { controller: "activities", action: "index", id: current_user.id }) unless current_user.parent?  %>
           </li>
+          <% if current_user.teacher? %>
           <li role="presentation">
             <%= link_to "Invite Student", invite_student_path %>
 <!--             <a href="/teachers/invite_student">Invite student</a>
  -->          </li>
-        <% end %>
+            <% end %>
+          <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user %>
