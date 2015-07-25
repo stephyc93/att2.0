@@ -1,20 +1,24 @@
-<h3>teachers show</h3>
-
-<table class="table">
-  <tr>
-    <th><h2>Students</h2></th>
-    <th><h2>Attendance</h2></th>
-  </tr>
-  <% @activities_students.each do |activity| %>
-  <tr>
-    <td><%= activity.student.name %></td> 
-    <td>
-      <% if activity.attendance.first %>
-        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-      <% else %>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-      <% end %>
-    </td>
-  </tr><br>
-  <% end %>
-</table>
+<% @activities_students.each do |activity| %>
+  <h2><%= activity.activity.name %></h2>
+  <table class="table">
+    <tr>
+      <th><h2>Students</h2></th>
+      <th><h2>Attendance</h2></th>
+    </tr>
+    <tr>
+    </tr>
+    <% activity.activity.students.each do |student| %>
+      <tr>
+        <td><%= student.name %></td>
+        <td>
+          <% if activity.attendance.first %>
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <br>
+<% end %>

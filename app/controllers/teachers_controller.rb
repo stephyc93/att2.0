@@ -5,7 +5,7 @@ class TeachersController < ApplicationController
 
   def show
   	@activities = Activity.where :teacher_id => @current_teacher.id
-    @activities_students = Activity.last.activities_students
+    @activities_students = ActivitiesStudent.all
     @student = Student.all
   end
 
