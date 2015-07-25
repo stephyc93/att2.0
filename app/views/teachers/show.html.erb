@@ -8,7 +8,7 @@
   <% @activities_students.each do |activity| %>
   <tr>
     <td><%= activity.student.name %></td> 
-    <td><%= activity.attendance %></td> 
+    <td><%= activity.attendance.first %></td> 
   </tr><br>
   <% end %>
 </table>

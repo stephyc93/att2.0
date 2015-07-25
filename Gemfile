@@ -18,6 +18,8 @@ gem 'gmaps4rails'
 
 gem 'underscore-rails'
 
+gem 'rails_12factor', group: :production
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
