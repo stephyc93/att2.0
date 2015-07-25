@@ -55,7 +55,7 @@ class ActivitiesController < ApplicationController
     if @activity.destroy
       redirect_to activities_path
     else
-       flash[:notice] = "Something went wrong Data not deleted"
+       flash[:success] = "Something went wrong Data not deleted"
     end
   end
 
@@ -65,8 +65,7 @@ class ActivitiesController < ApplicationController
     present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.first.to_i
     present = present == 1 ? 0 : 1
     ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
-
-    flash[:notice] = "#{@student.name} confirmed at the event."
+    flash[:success] = "#{@student.name} confirmed at the event."
     redirect_to :back
   end
 
@@ -74,9 +73,9 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find params[:activity_id]
     if @activity.students.exists? @current_student.id
       @activity.students.delete(@current_student)
-      flash[:notice] = "You have removed yourself from the event."
+      flash[:success] = "You have removed yourself from the event."
     else
-      flash[:notice] = "You have signed up for the event"
+      flash[:success] = "You have signed up for the event"
       @activity.students << @current_student
     end
 
@@ -86,25 +85,32 @@ class ActivitiesController < ApplicationController
   def attendance
     @activity = Activity.find params[:id]
     @activity.students.update_attributes(:attendance, 1)
-    flash[:notice] = "attendance taken"
+    flash[:success] = "attendance taken"
     redirect_to teacher_path
-#       <input type="checkbox" id="post_validate" name="post[validated]"
-#                                    value="1" checked="checked" />
-# <input name="post[validated]" type="hidden" value="0" />
-
-#       <input type="hidden"   name="model[attr]" value="0" />
-# <input type="checkbox" name="model[attr]" value="1" />
-
-# <%= hidden_field_tag 'model_name[column_name]', '0' %>
-# <%= check_box_tag 'model_name[column_name]', 1, (@data.model_name.column_name == 1 ? true : false) %>
-
   end
 
   def choose_students
     activity_id = params[:activity_id]
     @students = Student.all
-    # @students = Student.without_activity_enrollment(activity_id)
-    # binding.pry
+  end
+
+  def add_student
+    @student_id = params[:student_id]
+    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id],
+                                      student_id: @student_id)
+
+    if enrollment.save
+      flash[:success] = 'Student successfully added!'
+      # return redirect_to choose_students_path(params[:activity_id])
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    else
+      flash[:warning] = 'Enrollment failed!'
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    end
   end
 
   def remove_student
@@ -112,30 +118,17 @@ class ActivitiesController < ApplicationController
     @activities_student = ActivitiesStudent.find_by(activity_id: params[:activity_id], student_id: @student_id)
 
     if @activities_student.destroy
-      flash[:notice] = 'Student successfully removed!'
-      return redirect_to :back
+      flash[:success] = 'Student successfully removed!'
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
     else
       flash[:warning] = 'Unenrollment failed!'
-      render :choose_students
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
     end
   end
-
-  def add_student
-
-    @student_id = params[:student_id]
-    enrollment = ActivitiesStudent.new(activity_id: params[:activity_id],
-                                      student_id: @student_id)
-
-    if enrollment.save
-      flash[:notice] = 'Student successfully added!'
-      return redirect_to :back
-    else
-      flash[:warning] = 'Enrollment failed!'
-      render :choose_students
-    end
-  end
-
-
 
   private
 
