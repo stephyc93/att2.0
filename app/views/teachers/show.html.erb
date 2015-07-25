@@ -1,4 +1,4 @@
-<% @activities_students.each do |activity| %>
+<% @activities.each do |activity| %>
   <h2><%= activity.activity.name %></h2>
   <table class="table">
     <tr>
@@ -7,7 +7,7 @@
     </tr>
     <tr>
     </tr>
-    <% activity.activity.students.each do |student| %>
+    <% activity.activitiesstudent.students.each do |student| %>
       <tr>
         <td><%= student.name %></td>
         <td>
