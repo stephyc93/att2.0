@@ -1,5 +1,22 @@
 <h1>Student Show</h1>
-<!-- <table>
-  <tr><th>My Activities</th></tr>
-  <tr><th>My Attendance</th></tr>
-</table> -->
+<table class="table">
+  <tr>
+    <th>My Activities</th>
+    <th>My Attendance</th>
+  </tr>
+  <% @activity.each do |activitystudent| %>
+    <tr>
+      <td><%= activitystudent.activity.name %></td>
+      <td>
+      <% if activitystudent.attendance.first %>
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+      <% else %>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <% end %>
+    </td> 
+    </tr>
+  <% end %>
+</table>
+
+
+
