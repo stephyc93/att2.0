@@ -15,16 +15,9 @@
  *= require bootstrap-datetimepicker
  */
 
-.application-body, .no-padding{
+.application-body, .no-padding {
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
-}
-
-/*well for sign in*/
-.well {
-  height: 230px;
-  width: 200px;
-
 }
 
 #h1 {
@@ -59,7 +52,7 @@
     text-align: center;
     color: #fff;
     opacity: 0;
-    background: rgba(16,55,230,.8);
+    background: rgba(122,122,122,.8);
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;

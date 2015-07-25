@@ -21,6 +21,14 @@ Rails.application.routes.draw do
 
   get 'welcome/about_this_app' => 'welcome#app', as: :about_app
 
+  get 'welcome/darren_about' => 'welcome#darren_about', as: :darren_about
+
+  get 'welcome/sabina_about' => 'welcome#sabina_about', as: :sabina_about
+
+  get 'welcome/tyler_about' => 'welcome#tyler_about', as: :tyler_about
+
+  get 'welcome/steph_about' => 'welcome#steph_about', as: :steph_about
+
   post 'students/invite' => 'students#invite', as: :invite_student
 
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
