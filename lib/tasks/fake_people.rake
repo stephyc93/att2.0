@@ -66,11 +66,13 @@ namespace :db do
         name = Faker::Company.catch_phrase
         datestart = Time.now.utc + rand(20)
         dateend = datestart + 10*60*20
+        description = Faker::Lorem.paragraph(3)
         parent = '1'
         Activity.create!( name: name,
                       start: datestart,
                       end: dateend,
                       location: address.sample,
+                      description: description,
                       permission_slip: [0, 1].sample,
                       teacher_id: teacher.first.id)
         end # 5.times

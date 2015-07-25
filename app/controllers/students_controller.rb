@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
+
   def index
     @students = Student.all
-    @activities = Activity.all
   end
 
   def show
@@ -11,9 +11,8 @@ class StudentsController < ApplicationController
   	user = User.invite!(:email => params[:email], :fullname => params[:name]) do |u|
   	   u.skip_invitation = false
   	end
-
-    flash[:notice] = "Invitation has been sent!"
+    flash[:success] = "Invitation has been sent!"
     redirect_to :back
-
   end
+
 end

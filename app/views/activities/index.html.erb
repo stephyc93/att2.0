@@ -11,7 +11,7 @@
 
 
     <h2> Current event </h2>
-      <table class="table table-hover">
+      <table class="table table-hover table-responsive">
         <tr>
           <th>Activity Name</th>
           <th>Start Date</th>
@@ -20,10 +20,9 @@
           <th>Permission Slip?</th>
           <% if @current_teacher.present? %>
             <th>View Activity</th>
-            <th>Edit Activity</th>
-            <th>Delete Activity</th>
           <% end %>
           <% if @current_student.present? %>
+            <th>View Activity</th>
             <th>Sign Up?</th>
           <% end %>
         </tr>
@@ -34,7 +33,7 @@
               <td><%= activity.start %></td>
               <td><%= activity.end %></td>
               <td><%= activity.location %></td>
-              <td style="text-align: center;">  
+              <td style="text-align: center;">
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
@@ -47,21 +46,16 @@
                     <i class="glyphicon glyphicon-eye-open"></i>
                   <% end %>
                 </td>
-                <td>
-                  <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
-                    <i class="glyphicon glyphicon-trash"></i>
-                  <% end %>
-                </td>
               <% end %>
               <% if @current_student.present?  %>
                 <% attending = activity.students.exists? @current_student.id %>
               <% end %>
               <% if @current_student.present? %>
+                <td>
+                  <%= link_to activity_path(activity), class: "btn btn-primary" do %>
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                  <% end %>
+                </td>
                 <td>
                   <% if attending %>
                     <%= link_to student_sign_up_path(activity), class: "btn btn-danger" do %>

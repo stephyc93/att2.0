@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150722134933) do
+ActiveRecord::Schema.define(version: 20150724211445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20150722134933) do
     t.string   "location"
     t.integer  "permission_slip"
     t.integer  "teacher_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.text     "description"
   end
 
   create_table "activities_students", force: :cascade do |t|
@@ -101,8 +104,4 @@ ActiveRecord::Schema.define(version: 20150722134933) do
   add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "activities", "teachers"
-  add_foreign_key "parents", "users"
-  add_foreign_key "students", "users"
-  add_foreign_key "teachers", "users"
 end
