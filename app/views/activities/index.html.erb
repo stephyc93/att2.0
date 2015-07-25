@@ -1,8 +1,10 @@
   <div class="row">
     <div class="col-md-12">
       <h1 class="page-header text-center">Activities
-        <%= link_to new_activity_path, class: "btn btn-success" do %>
-          <i class="glyphicon glyphicon-plus"></i>
+        <% if current_user.teacher? %>
+          <%= link_to new_activity_path, class: "btn btn-success" do %>
+            <i class="glyphicon glyphicon-plus"></i>
+          <% end %>
         <% end %>
         <p align="right">
         </p></h1>
