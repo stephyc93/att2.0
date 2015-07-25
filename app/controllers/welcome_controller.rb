@@ -8,4 +8,18 @@ class WelcomeController < ApplicationController
 
   def app
   end 
+
+  def darren_about
+  end
+
+  def sabina_about
+  end
+
+  def steph_about
+  end
+
+  def tyler_about
+  end
+
+
 end
