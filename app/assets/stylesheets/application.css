@@ -45,11 +45,6 @@
     background-color: #fff;
 }
 
-
- body: {
-  background-image: url(assets/)
- }
- /* start of about me page */
  .portfolio-box {
     display: block;
     position: relative;
@@ -99,13 +94,3 @@
 .portfolio-box:hover .portfolio-box-caption {
     opacity: 1;
 }
-
-@media(min-width:768px) {
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-category {
-        font-size: 16px;
-    }
-
-    .portfolio-box .portfolio-box-caption .portfolio-box-caption-content .project-name {
-        font-size: 22px;
-    }
-    /* end of about me page */
