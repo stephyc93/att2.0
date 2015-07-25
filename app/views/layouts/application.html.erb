@@ -30,12 +30,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Activity Monitor</a>
+      <a class="navbar-brand" href="/">Attendance Tracker</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+        <li role="presentation"><a href="/about">About</a></li>
         <% if current_user %>
           <li role="presentation">
             <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
