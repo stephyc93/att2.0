@@ -1,4 +1,4 @@
- <!-- <h3>teachers show</h3> -->
+<h3>teachers show</h3>
 
 <table class="table">
   <tr>
@@ -8,7 +8,13 @@
   <% @activities_students.each do |activity| %>
   <tr>
     <td><%= activity.student.name %></td> 
-    <td><%= activity.attendance %></td> 
+    <td>
+      <% if activity.attendance.first %>
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+      <% else %>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      <% end %>
+    </td> 
   </tr><br>
   <% end %>
 </table>
