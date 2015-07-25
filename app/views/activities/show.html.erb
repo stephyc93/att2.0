@@ -26,8 +26,10 @@
 
                 <tr>
                   <th><h3>Students</h3></th>
-                  <th><h3><%= Date.today %></h3></th>
-                  <th><h3>Attendance</h3></th>
+                  <% if @activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date %>
+                    <th><h3><%= Date.today %></h3></th>
+                    <th><h3>Attendance</h3></th>
+                  <% end %>
                 </tr>
 
                 <% @activity.students.each do |student| %>
