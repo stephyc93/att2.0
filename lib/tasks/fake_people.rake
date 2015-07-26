@@ -4,7 +4,7 @@ namespace :db do
   desc "Fill database with sample data"
   task fake_students: :environment do
     20.times do |n|
-      puts "[DEBUG] creating user #{n+1} of 10"
+      puts "[DEBUG] creating user #{n+1} of 20"
       fullname = Faker::Name.name
       email = "students-#{n+1}@example.com"
       student = '1'
