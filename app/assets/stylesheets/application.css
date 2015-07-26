@@ -24,6 +24,9 @@
   text-align: center;
   color: white;
   }
+h1, h3 {
+  color: black;
+}
 
 #map-container {
   height: 400px;

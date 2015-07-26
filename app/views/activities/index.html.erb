@@ -16,21 +16,21 @@
       </div> <!-- /col-md-12 -->
   </div> <!-- /row -->
 
-  <div class="row visible-md-block visible-lg-block">
-    <h2>Current event </h2>
+  <div class="row">
+    <div class="col-md-12"><h2>Current event </h2></div>
       <table class="table table-hover table-responsive">
         <tr>
           <th>Activity Name</th>
           <th>Start Date</th>
-          <th class="hidden-md">End Date</th>
+          <th class="hidden-sm hidden-xs">End Date</th>
           <th>Location</th>
-          <th>Permission Slip?</th>
+          <th class="hidden-sm hidden-xs">Permission Slip?</th>
           <% if @current_teacher.present? %>
             <th>View Activity</th>
           <% end %>
           <% if @current_student.present? %>
             <th>View Activity</th>
-            <th>Sign Up?</th>
+            <th class="hidden-sm hidden-xs">Sign Up?</th>
           <% end %>
         </tr>
         <% @activities.each do |activity| %>
@@ -38,9 +38,9 @@
             <tr>
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
-              <td class="hidden-md"><%= activity.end %></td>
+              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
               <td><%= activity.location %></td>
-              <td style="text-align: center;">
+              <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
@@ -80,15 +80,15 @@
         <% end %>
       </table>
   </div><!-- /current event -->
-  <div class="row  visible-md-block visible-lg-block">
+  <div class="row">
     <h2>Future event </h2>
       <table class="table table-hover">
         <tr>
           <th>Activity Name</th>
           <th>Start Date</th>
-          <th>End Date</th>
+          <th class="hidden-sm hidden-xs">End Date</th>
           <th>Location</th>
-          <th>Permission Slip?</th>
+          <th class="hidden-sm hidden-xs">Permission Slip?</th>
             <% if @current_teacher.present? %>
               <th>View Activity</th>
              <!--  <th>Edit Activity</th>
@@ -104,9 +104,9 @@
             <tr>
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
-              <td><%= activity.end %></td>
+              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
               <td><%= activity.location %></td>
-              <td style="text-align: center;">
+              <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
@@ -119,16 +119,6 @@
                     <i class="glyphicon glyphicon-eye-open"></i>
                   <% end %>
                 </td>
-                <!-- <td>
-                  <%= link_to edit_activity_path(activity), class: "btn btn-info" do %>
-                    <i class="glyphicon glyphicon-pencil"></i>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to activity_path(activity), method: :delete, class: "btn btn-danger" do %>
-                    <i class="glyphicon glyphicon-trash"></i>
-                  <% end %>
-                </td> -->
               <% end %>
               <% if @current_student.present?  %>
                 <% attending = activity.students.exists? @current_student.id %>
@@ -151,15 +141,15 @@
         <% end %>
       </table>
   </div><!-- /future event -->
-  <div class="row visible-md-block visible-lg-block">
+  <div class="row">
     <h2>Completed event </h2>
       <table class="table table-hover">
         <tr>
           <th>Activity Name</th>
           <th>Start Date</th>
-          <th>End Date</th>
+          <th class="hidden-sm hidden-xs">End Date</th>
           <th>Location</th>
-          <th>Permission Slip?</th>
+          <th class="hidden-sm hidden-xs">Permission Slip?</th>
             <% if @current_teacher.present? %>
               <th>View Activity</th>
             <% end %>
@@ -170,9 +160,9 @@
             <tr>
               <td><%= activity.name %></td>
               <td><%= activity.start %></td>
-              <td><%= activity.end %></td>
+              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
               <td><%= activity.location %></td>
-              <td style="text-align: center;">
+              <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
                   <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 <% else %>
@@ -194,23 +184,6 @@
         <% end %>
       </table>
   </div> <!-- /completed event -->
-
-  <!-- This div is for mobile responsive on smaller devices -->
-  <br />
-<div class="row visible-sm-block visible-xs-block">
-  <div class="col-sm-12">
-    <% @activities.each do |activity| %>
-      <% if activity.start.to_date <= Date.today.to_date && activity.end.to_date >= Date.today.to_date %>
-        <%= link_to activity_path(activity), class: "btn btn-default" do %>
-          <td><%= activity.name %></td>
-          <br />
-          <td><%= activity.start %></td>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
 
 <% content_for :javascripts do %>
   <script type="text/javascript">
