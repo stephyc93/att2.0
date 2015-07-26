@@ -5,20 +5,20 @@
     <tr>
       <th>Activity Name</th>
       <th>Start Date</th>
-      <th>End Date</th>
+      <th class="hidden-sm hidden-xs">End Date</th>
       <th>Location</th>
-      <th>Permission Slip</th>
+      <th class="hidden-sm hidden-xs">Permission Slip</th>
       <th>Show Activity</th>
-      <th>Edit Activity</th>
-      <th>Delete</th>
+      <th class="hidden-sm hidden-xs">Edit Activity</th>
+      <th class="hidden-sm hidden-xs">Delete</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
       <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>
         <tr>
           <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
-          <td><%= myactivity.end %></td>
-          <td><%= myactivity.location %></td>
+          <td class="vhidden-sm hidden-xs"><%= myactivity.end %></td>
+          <td class="hidden-sm hidden-xs"><%= myactivity.location %></td>
           <td style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -31,12 +31,12 @@
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
-          <td>
+          <td class="visible-md-block visible-lg-block">
             <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
-          <td>
+          <td class="visible-md-block visible-lg-block">
             <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
@@ -54,21 +54,21 @@
     <tr>
       <th>Activity Name</th>
       <th>Start Date</th>
-      <th>End Date</th>
+      <th class="hidden-sm hidden-xs">End Date</th>
       <th>Location</th>
-      <th>Permission Slip</th>
+      <th class="hidden-sm hidden-xs">Permission Slip</th>
       <th>Show Activity</th>
-      <th>Edit Activity</th>
-      <th>Delete</th>
+      <th class="hidden-sm hidden-xs">Edit Activity</th>
+      <th class="hidden-sm hidden-xs">Delete</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
       <% if myactivity.start.to_date > Time.now.to_date %>
         <tr>
           <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
-          <td><%= myactivity.end %></td>
+          <td class="visible-md-block"><%= myactivity.end %></td>
           <td><%= myactivity.location %></td>
-          <td style="text-align: center;">
+          <td class="visible-md-block" style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
@@ -80,12 +80,12 @@
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
-          <td>
+          <td class="visible-md-block">
             <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
-          <td>
+          <td class="visible-md-block">
             <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
@@ -103,18 +103,18 @@
     <tr>
       <th>Activity Name</th>
       <th>Start Date</th>
-      <th>End Date</th>
+      <th class="hidden-sm hidden-xs">End Date</th>
       <th>Location</th>
-      <th>Permission Slip</th>
+      <th class="hidden-sm hidden-xs">Permission Slip</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
        <% if myactivity.end.to_date < Date.today.to_date %>
         <tr>
           <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
-          <td><%= myactivity.end %></td>
+          <td class="hidden-sm hidden-xs"><%= myactivity.end %></td>
           <td><%= myactivity.location %></td>
-          <td style="text-align: center;">
+          <td class="hidden-sm hidden-xs" style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
