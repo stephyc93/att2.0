@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_user
 
+  before_filter :set_mailer_host
+
+  def set_mailer_host
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
   def after_sign_in_path_for(resource)
 
     if resource.parent?

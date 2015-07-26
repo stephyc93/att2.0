@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   # get 'teachers/index'
 
   resources :activities
-  match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all
+  match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all #this has to come before :teachers
   resources :teachers
 
-  post 'students/invite' => 'students#invite'
+  post 'students/invite' => 'students#invite' #this has to come before :students
   resources :students
 
   resources :parents
