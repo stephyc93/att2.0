@@ -30,6 +30,9 @@ Rails.application.routes.draw do
 
   get 'welcome/steph_about' => 'welcome#steph_about', as: :steph_about
 
+  get 'welcome/story' => 'welcome#story', as: :story
+
+
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
   get 'activities/activities_gmap' => 'activities#activities_gmap'
 
