@@ -5,7 +5,7 @@
         <div class="col-md-12">
         <h3><%= @activity.name %></h3>
          <% if (@activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date) || ( @activity.start.to_date > Time.now.to_date) %>
-          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" if @current_teacher.present? %>
+          <%= link_to "Choose Students", choose_students_path(@activity.id), :class => "btn btn-default" if @current_teacher.present? && @activity.teacher_id == @current_teacher.id %>
           <%= link_to "Sign up!", student_sign_up_path(@activity), :class => "btn btn-primary" if @current_student.present? %>
           <br>
         <% end%>
