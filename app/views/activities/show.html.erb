@@ -37,7 +37,7 @@
                     <td><%= student.name %></td>
                     <% if @activity.start.to_date <= Date.today.to_date && @activity.end.to_date >= Date.today.to_date %>
                     <td>
-                      <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.first.to_i == 1 %>
+                      <% if student.activities_students.where( :activity_id => params[:id]).first.attendance.to_i == 1 %>
                         <input value="1" name="attendance" type="checkbox" checked/>
                       <% else %>
                         <input value="1" name="attendance" type="checkbox"/>

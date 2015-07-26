@@ -40,6 +40,12 @@
   width: 100%;
 }
 
+.alert-notice {
+  background-image: linear-gradient(to bottom,#dff0d8 0,#c8e5bc 100%);
+  background-color: #b2dba1;
+  background-repeat: repeat-x;
+}
+
 
 .container {
     background-color: #fff;

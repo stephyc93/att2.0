@@ -41,6 +41,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
 
     if @activity.save
+      flash[:success] = "#{@activity.name} has been created."
       redirect_to activities_path
     else
       render :new
@@ -86,9 +87,10 @@ class ActivitiesController < ApplicationController
   def confirmAttendance
     @activity = Activity.find(params[:activity_id])
     @student = Student.find params[:student_id]
-    present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.first.to_i
+    present = @student.activities_students.where( :activity_id => params[:activity_id]).first.attendance.to_i
     present = present == 1 ? 0 : 1
-    ActivitiesStudent.confirm!(@activity.id, params[:student_id], present)
+    activestudent = ActivitiesStudent.where(["student_id = ? and activity_id = ?", @student.id, @activity.id]).first
+    activestudent.update_attributes(:attendance => present)
     flash[:success] = "#{@student.name} confirmed at the event."
     redirect_to :back
   end
