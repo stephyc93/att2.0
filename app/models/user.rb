@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :invitable, :registerable
+  devise :database_authenticatable, :invitable, :registerable, :validatable, :validate_on_invite => false
+
+  validates :name, :email, presence: true, on: :create
 
   after_create :create_associated_model
 
@@ -13,7 +15,6 @@ class User < ActiveRecord::Base
   private
 
   def create_associated_model
-    
   	if self.parent?
       parent = Parent.create(:name => self.fullname, :user_id => self.id)
     elsif self.teacher?

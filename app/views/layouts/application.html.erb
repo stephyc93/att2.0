@@ -44,7 +44,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li role="presentation"><a href="/about">About</a></li>
-        <% if current_user %>
+        <% if current_user && current_user.email.present? %>
           <li role="presentation">
             <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
             <%= link_to_if(current_user.student?, "Enrollment", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
@@ -60,8 +60,7 @@
           <% if current_user.teacher? %>
           <li role="presentation">
             <%= link_to "Invite Student", invite_student_path %>
-<!--             <a href="/teachers/invite_student">Invite student</a>
- -->          </li>
+         </li>
             <% end %>
           <% end %>
       </ul>
