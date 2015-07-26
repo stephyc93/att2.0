@@ -12,9 +12,8 @@ Rails.application.routes.draw do
   # get 'teachers/index'
 
   resources :activities
-
-  match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all
   resources :teachers
+  match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all
 
   post 'students/invite' => 'students#invite'
   resources :students
@@ -31,7 +30,6 @@ Rails.application.routes.draw do
 
   get 'welcome/steph_about' => 'welcome#steph_about', as: :steph_about
 
-  
   get 'activities/:activity_id/choose_students' => 'activities#choose_students', as: :choose_students
   get 'activities/activities_gmap' => 'activities#activities_gmap'
 
