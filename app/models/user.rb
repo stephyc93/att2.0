@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :invitable, :registerable, :validatable, :validate_on_invite => false
 
-  validates :name, :email, presence: true, on: :create
+  validates :email, presence: true, on: :create
 
   after_create :create_associated_model
 
