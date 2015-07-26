@@ -38,6 +38,11 @@ class ActivitiesController < ApplicationController
     params[:activity][:permission_slip] = params[:permission_slip]
     params[:activity][:teacher_id] = @current_teacher.id
 
+    if params[:activity][:start].to_date != params[:activity][:end].to_date
+      flash[:warning] = "Start and End Dates must be on the same day."
+      return redirect_to :back
+    end
+
     @activity = Activity.new(activity_params)
 
     if @activity.save
