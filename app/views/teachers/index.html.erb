@@ -6,7 +6,7 @@
       <th>Activity Name</th>
       <th>Start Date</th>
       <th class="hidden-sm hidden-xs">End Date</th>
-      <th>Location</th>
+      <th class="hidden-sm hidden-xs">Location</th>
       <th class="hidden-sm hidden-xs">Permission Slip</th>
       <th>Show Activity</th>
       <th class="hidden-sm hidden-xs">Edit Activity</th>
@@ -19,7 +19,7 @@
           <td><%= local_relative_time(myactivity.start, type: 'time-or-date') %></td>
           <td class="vhidden-sm hidden-xs"><%= local_relative_time(myactivity.end, type: 'time-or-date') %></td>
           <td class="hidden-sm hidden-xs"><%= myactivity.location %></td>
-          <td style="text-align: center;">
+          <td class="hidden-sm hidden-xs" style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
@@ -31,12 +31,12 @@
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
-          <td class="visible-md-block visible-lg-block">
+          <td class="hidden-sm hidden-xs">
             <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
-          <td class="visible-md-block visible-lg-block">
+          <td class="hidden-sm hidden-xs">
             <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
@@ -55,7 +55,7 @@
       <th>Activity Name</th>
       <th>Start Date</th>
       <th class="hidden-sm hidden-xs">End Date</th>
-      <th>Location</th>
+      <th class="hidden-sm hidden-xs">Location</th>
       <th class="hidden-sm hidden-xs">Permission Slip</th>
       <th>Show Activity</th>
       <th class="hidden-sm hidden-xs">Edit Activity</th>
@@ -66,9 +66,9 @@
         <tr>
           <td><%= myactivity.name %></td>
           <td><%= local_relative_time(myactivity.start, type: 'time-or-date') %></td>
-          <td class="visible-md-block"><%= local_relative_time(myactivity.end, type: 'time-or-date') %></td>
-          <td><%= myactivity.location %></td>
-          <td class="visible-md-block" style="text-align: center;">
+          <td class="hidden-sm hidden-xs"><%= local_relative_time(myactivity.end, type: 'time-or-date') %></td>
+          <td class="hidden-sm hidden-xs"><%= myactivity.location %></td>
+          <td class="hidden-sm hidden-xs" style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
@@ -80,12 +80,12 @@
               <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
-          <td class="visible-md-block">
+          <td class="hidden-sm hidden-xs">
             <%= link_to edit_activity_path(myactivity), class: "btn btn-info" do %>
               <i class="glyphicon glyphicon-pencil"></i>
             <% end %>
           </td>
-          <td class="visible-md-block">
+          <td class="hidden-sm hidden-xs">
             <%= link_to activity_path(myactivity), method: :delete, class: "btn btn-danger" do %>
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
@@ -104,7 +104,7 @@
       <th>Activity Name</th>
       <th>Start Date</th>
       <th class="hidden-sm hidden-xs">End Date</th>
-      <th>Location</th>
+      <th class="hidden-sm hidden-xs">Location</th>
       <th class="hidden-sm hidden-xs">Permission Slip</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
