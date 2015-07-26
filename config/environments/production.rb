@@ -5,7 +5,6 @@ Rails.application.configure do
   config.cache_classes = true
 
   config.action_mailer.default_url_options = { :host => 'shrouded-mountain-9994.herokuapp.com' }
-  config.action_mailer.delivery_method = :letter_opener # get rid of this if we decide to use real email.
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
