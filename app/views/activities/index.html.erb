@@ -37,8 +37,8 @@
           <% if activity.start.to_date <= Date.today.to_date && activity.end.to_date >= Date.today.to_date %>
             <tr>
               <td><%= activity.name %></td>
-              <td><%= activity.start %></td>
-              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
+              <td><%= local_relative_time(activity.start, type: 'time-or-date') %></td>
+              <td class="hidden-sm hidden-xs"><%= local_relative_time(activity.end, type: 'time-or-date') %></td>
               <td><%= activity.location %></td>
               <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
@@ -103,8 +103,8 @@
         <!-- Future activity  -->
             <tr>
               <td><%= activity.name %></td>
-              <td><%= activity.start %></td>
-              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
+              <td><%= local_relative_time(activity.start, type: 'time-or-date') %></td>
+              <td class="hidden-sm hidden-xs"><%= local_relative_time(activity.end, type: 'time-or-date') %></td>
               <td><%= activity.location %></td>
               <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
@@ -159,8 +159,8 @@
         <!-- Completed activity -->
             <tr>
               <td><%= activity.name %></td>
-              <td><%= activity.start %></td>
-              <td class="hidden-sm hidden-xs"><%= activity.end %></td>
+              <td><%= local_relative_time(activity.start, type: 'time-or-date') %></td>
+              <td class="hidden-sm hidden-xs"><%= local_relative_time(activity.end, type: 'time-or-date') %></td>
               <td><%= activity.location %></td>
               <td class="hidden-sm hidden-xs" style="text-align: center;">
                 <% if activity.permission_slip %>
