@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
   	   u.skip_invitation = false
   	end
     flash[:success] = "Invitation has been sent!"
-    redirect_to :back
+    redirect_to teachers_path
   end
 
 end
