@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   # get 'teachers/index'
 
   resources :activities
-  resources :teachers
   match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all
+  resources :teachers
 
   post 'students/invite' => 'students#invite'
   resources :students
