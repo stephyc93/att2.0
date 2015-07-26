@@ -32,6 +32,10 @@ h1, h2, h3, label {
   color: black;
 }
 
+th h3 {
+  color: white;
+}
+
 #map-container {
   height: 400px;
   border-radius: 16px 16px;

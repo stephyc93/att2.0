@@ -106,6 +106,7 @@
       <th class="hidden-sm hidden-xs">End Date</th>
       <th class="hidden-sm hidden-xs">Location</th>
       <th class="hidden-sm hidden-xs">Permission Slip</th>
+      <th>Show Activity</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
        <% if myactivity.end.to_date < Date.today.to_date %>
@@ -113,12 +114,17 @@
           <td><%= myactivity.name %></td>
           <td><%= local_relative_time(myactivity.start, type: 'time-or-date') %></td>
           <td class="hidden-sm hidden-xs"><%= local_relative_time(myactivity.end, type: 'time-or-date') %></td>
-          <td><%= myactivity.location %></td>
+          <td class="hidden-sm hidden-xs"><%= myactivity.location %></td>
           <td class="hidden-sm hidden-xs" style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to activity_path(myactivity), class: "btn btn-primary" do %>
+              <i class="glyphicon glyphicon-eye-open"></i>
             <% end %>
           </td>
         </tr>
