@@ -1,4 +1,4 @@
-<h1>Teachers#index</h1>
+<h1>Enrollment</h1>
 <h3>My Current Activities</h3>
   <table class="table">
     <tr>
@@ -12,13 +12,13 @@
       <th>Delete</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
-      <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %> 
+      <% if myactivity.start.to_date <= Date.today.to_date && myactivity.end.to_date >= Date.today.to_date %>
         <tr>
-          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
           <td><%= myactivity.end %></td>
           <td><%= myactivity.location %></td>
-          <td style="text-align: center;">  
+          <td style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
@@ -40,7 +40,7 @@
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
           </td>
-        </tr> 
+        </tr>
       <% end %>
     <% end %>
   </table>
@@ -63,11 +63,11 @@
     <% @current_teacher.activities.each do |myactivity| %>
       <% if myactivity.start.to_date > Time.now.to_date %>
         <tr>
-          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
           <td><%= myactivity.end %></td>
           <td><%= myactivity.location %></td>
-          <td style="text-align: center;">  
+          <td style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
@@ -89,7 +89,7 @@
               <i class="glyphicon glyphicon-trash"></i>
             <% end %>
           </td>
-        </tr> 
+        </tr>
       <% end %>
     <% end %>
   </table>
@@ -107,23 +107,20 @@
       <th>Permission Slip</th>
     </tr>
     <% @current_teacher.activities.each do |myactivity| %>
-       <% if myactivity.end.to_date < Date.today.to_date %>  
+       <% if myactivity.end.to_date < Date.today.to_date %>
         <tr>
-          <td><%= myactivity.name %></td> 
+          <td><%= myactivity.name %></td>
           <td><%= myactivity.start %></td>
           <td><%= myactivity.end %></td>
           <td><%= myactivity.location %></td>
-          <td style="text-align: center;">  
+          <td style="text-align: center;">
             <% if myactivity.permission_slip %>
               <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             <% else %>
               <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
             <% end %>
           </td>
-        </tr> 
+        </tr>
       <% end %>
     <% end %>
   </table>
-
-
-   

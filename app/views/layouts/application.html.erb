@@ -46,11 +46,11 @@
         <li role="presentation"><a href="/about">About</a></li>
         <% if current_user %>
           <li role="presentation">
-            <%= link_to_if(current_user.teacher?, "Teachers", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
+            <%= link_to_if(current_user.teacher?, "Enrollment", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
             <%= link_to_if(current_user.student?, "Enrollment", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
           </li>
           <% if current_user.teacher? %>
-            <li role="presentation"><%= link_to "My Profile", teacher_path(@current_teacher) %></li>
+            <li role="presentation"><%= link_to "Attendance", teacher_path(@current_teacher) %></li>
           <% else %>
             <li role="presentation"><%= link_to "Attendance", student_path(@current_student) %></li>
           <% end %>
