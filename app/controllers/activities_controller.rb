@@ -41,6 +41,7 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
 
     if @activity.save
+      flash[:success] = "#{@activity.name} has been created."
       redirect_to activities_path
     else
       render :new
