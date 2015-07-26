@@ -20,11 +20,15 @@
   background-repeat: no-repeat;
 }
 
+body {
+  color: white;
+}
+
 #h1 {
   text-align: center;
   color: white;
   }
-h1, h3 {
+h1, h2, h3, label {
   color: black;
 }
 
@@ -47,8 +51,12 @@ h1, h3 {
   background-image: linear-gradient(to bottom,#dff0d8 0,#c8e5bc 100%);
   background-color: #b2dba1;
   background-repeat: repeat-x;
+  color: black;
 }
 
+.alert-warning {
+  color: black;
+}
 
 .container {
     background-color: #fff;
