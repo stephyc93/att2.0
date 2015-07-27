@@ -137,4 +137,5 @@ th h3, th p {
 .thumb-img {
     width: 30%;
     margin: 0 auto;
+    border: 3px solid black;
 }
