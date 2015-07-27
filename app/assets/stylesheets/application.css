@@ -133,3 +133,8 @@ th h3, th p {
 .portfolio-box:hover .portfolio-box-caption {
     opacity: 1;
 }
+
+.thumb-img {
+    width: 30%;
+    margin: 0 auto;
+}
