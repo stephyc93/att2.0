@@ -28,7 +28,8 @@ body {
   text-align: center;
   color: white;
   }
-h1, h2, h3, label {
+  
+h1, h2, h3, label, p {
   color: black;
 }
 

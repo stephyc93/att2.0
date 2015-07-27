@@ -6,6 +6,9 @@ class Activity < ActiveRecord::Base
   geocoded_by :full_street_address
   after_validation :geocode
 
+  include PgSearch #adds search functionality
+  pg_search_scope :search_by_activity, :against => [:name, :description] #search against these two columns
+
   def is_current?
   	return true if self.start.to_date <= Date.today.to_date && self.end.to_date >= Date.today.to_date
   end

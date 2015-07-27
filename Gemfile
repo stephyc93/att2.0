@@ -24,6 +24,8 @@ ruby "2.2.2"
 
 gem 'local_time'
 
+gem 'pg_search' # Search the site
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

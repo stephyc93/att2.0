@@ -6,7 +6,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def invite_resource
     ## skip sending emails on invite
     resource_class.invite!(invite_params, current_inviter) do |u|
-      u.skip_invitation = true
+      u.skip_invitation = false
     end
   end
 
@@ -15,7 +15,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def accept_resource
     resource = resource_class.accept_invitation!(update_resource_params)
     ## Report accepting invitation to analytics
-    Analytics.report('invite.accept', resource.id)
+    #Analytics.report('invite.accept', resource.id)
     resource
   end
 end

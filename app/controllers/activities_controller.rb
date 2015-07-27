@@ -19,11 +19,6 @@ class ActivitiesController < ApplicationController
 
   def create
 
-    if params[:activity][:end] < params[:activity][:start]
-      flash[:warning] = "You can't have an end date before a start date."
-      return redirect_to :back
-    end
-
     if params[:activity][:end].blank? || params[:activity][:start].blank?
       flash[:warning] = "You must provide a start and end date."
       return redirect_to :back
@@ -40,6 +35,11 @@ class ActivitiesController < ApplicationController
 
     if params[:activity][:start].to_date != params[:activity][:end].to_date
       flash[:warning] = "Start and End Dates must be on the same day."
+      return redirect_to :back
+    end
+
+    if params[:activity][:end].to_time < params[:activity][:start].to_time
+      flash[:warning] = "You can't have an end date before a start date."
       return redirect_to :back
     end
 
@@ -120,6 +120,11 @@ class ActivitiesController < ApplicationController
     activestudent.update_attributes(:attendance => present)
     flash[:success] = "#{@student.name} confirmed at the event."
     redirect_to :back
+  end
+
+  def search
+    @activities = Activity.search_by_activity(params[:search])
+    @search_terms = params[:search]
   end
 
   def student_sign_up
