@@ -24,6 +24,10 @@ body {
   color: white;
 }
 
+.row {
+  margin-bottom: 10%;
+}
+
 .center {
   background-color: #dedede;
   margin: 10% 37% 10% 37%;
