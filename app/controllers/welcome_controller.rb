@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   end
 
   def app
-  end 
+  end
 
   def darren_about
   end

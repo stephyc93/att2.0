@@ -18,7 +18,7 @@
   <%= csrf_meta_tags %>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  
+
 </head>
 <header>
 
@@ -71,7 +71,8 @@
 </nav>
 </header>
 
-<body>
+<body class = "<%= action_name %>">
+
   <div class="container">
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-#{name}" %>
