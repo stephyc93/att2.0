@@ -25,6 +25,19 @@ body {
   background-color: #272b30;
 }
 
+.center {
+  background-color: #dedede;
+  margin: 10% 37% 10% 37%;
+}
+
+th p {
+  color: white;
+}
+
+#fullname {
+  width: 300px;
+}
+
 #h1 {
   text-align: center;
   color: white;
