@@ -33,6 +33,10 @@ th p {
   color: white;
 }
 
+#fullname {
+  width: 300px;
+}
+
 #h1 {
   text-align: center;
   color: white;
