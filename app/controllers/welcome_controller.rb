@@ -4,10 +4,11 @@ class WelcomeController < ApplicationController
   end
 
   def about
+    render('about', layout: 'about')
   end
 
   def app
-  end 
+  end
 
   def darren_about
   end
