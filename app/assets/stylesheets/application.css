@@ -85,7 +85,9 @@ th h3, th p {
     background-color: #fff;
 }
 
-about.countainer
+body.about .container{
+  padding: 0;
+}
 
  .portfolio-box {
     display: block;

@@ -4,7 +4,6 @@ class WelcomeController < ApplicationController
   end
 
   def about
-    render('about', layout: 'about')
   end
 
   def app
