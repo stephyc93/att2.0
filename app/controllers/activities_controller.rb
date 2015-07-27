@@ -122,6 +122,11 @@ class ActivitiesController < ApplicationController
     redirect_to :back
   end
 
+  def search
+    @activities = Activity.search_by_activity(params[:search])
+    @search_terms = params[:search]
+  end
+
   def student_sign_up
     @activity = Activity.find params[:activity_id]
     if @activity.students.exists? @current_student.id

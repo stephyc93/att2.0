@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   # get 'teachers/index'
 
+  match 'activities/search' => 'activities#search', as: :activities_search, via: :all # search the activities
+
   resources :activities
   match 'teachers/invite_student' => 'teachers#invite_student', as: :invite_student, via: :all #this has to come before :teachers
   resources :teachers
