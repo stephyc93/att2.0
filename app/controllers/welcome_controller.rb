@@ -21,5 +21,8 @@ class WelcomeController < ApplicationController
   def tyler_about
   end
 
+  def story
+  end
+
 
 end
