@@ -25,12 +25,16 @@ body {
   background-color: #272b30;
 }
 
+.row {
+  margin-bottom: 10%;
+}
+
 .center {
   background-color: #dedede;
   margin: 10% 37% 10% 37%;
 }
 
-th p {
+.white {
   color: white;
 }
 
@@ -137,4 +141,10 @@ body.about .container{
 
 .portfolio-box:hover .portfolio-box-caption {
     opacity: 1;
+}
+
+.thumb-img {
+    width: 30%;
+    margin: 0 auto;
+    border: 3px solid black;
 }
