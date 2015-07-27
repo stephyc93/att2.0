@@ -8,15 +8,16 @@
     <tr>
       <td><%= activitystudent.activity.name %></td>
       <td>
-      <% if activitystudent.attendance.first %>
+      <% if activitystudent.attendance %>
         <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
       <% else %>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-      <% end %>
-    </td> 
+      <% end %> 
+      </td> 
     </tr>
   <% end %>
 </table>
+
 
 
 

@@ -22,6 +22,10 @@ gem 'rails_12factor', group: :production
 
 ruby "2.2.2"
 
+gem 'local_time'
+
+gem 'pg_search' # Search the site
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -51,6 +55,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 group :development do
   gem "letter_opener"
 end
+
+gem 'postmark-rails', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
