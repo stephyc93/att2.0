@@ -22,13 +22,14 @@
 
 body {
   color: white;
+  background-color: #272b30;
 }
 
 #h1 {
   text-align: center;
   color: white;
   }
-  
+
 h1, h2, h3, label, p {
   color: black;
 }
@@ -70,6 +71,8 @@ th h3, th p {
 .container {
     background-color: #fff;
 }
+
+about.countainer
 
  .portfolio-box {
     display: block;
