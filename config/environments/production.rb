@@ -6,6 +6,9 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => 'shrouded-mountain-9994.herokuapp.com' }
 
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => "2640f5b3-438c-4f60-b502-b8fc765d0c42" }
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
