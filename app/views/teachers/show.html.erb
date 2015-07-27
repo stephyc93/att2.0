@@ -1,8 +1,8 @@
-<h1>Attendance</h1>
-<h3>My Student's Attendance</h3>
+<!-- <h1>Attendance</h1> -->
+<h1>My Student's Attendance</h1>
   <hr>
   <% @activities.each do |activity| %>
-    <%= activity.name %>
+    <h3><%= activity.name %></h3>
     <table class="table">
       <tr>
         <th>Students</th>
@@ -24,7 +24,7 @@
           <td>
             <p><%= student.activities_students.where(:attendance => 1).length %></p>
           </td>
-      <% end %> <!-- /activity -->
+      <% end %> 
     </table>
     <br>
   <% end %>
