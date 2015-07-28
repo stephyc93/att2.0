@@ -120,4 +120,5 @@ th h3 {
 .thumb-img {
     width: 30%;
     margin: 0 auto;
+    border: 3px solid black;
 }
