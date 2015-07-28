@@ -116,3 +116,8 @@ th h3 {
 .portfolio-box:hover .portfolio-box-caption {
     opacity: 1;
 }
+
+.thumb-img {
+    width: 30%;
+    margin: 0 auto;
+}
