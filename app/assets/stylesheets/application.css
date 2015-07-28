@@ -25,6 +25,10 @@ body {
   background-color: #272b30;
 }
 
+.buttom {
+  padding-bottom: 2%;
+}
+
 .row {
   margin-bottom: 10%;
 }

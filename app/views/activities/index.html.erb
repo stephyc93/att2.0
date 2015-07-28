@@ -40,7 +40,7 @@
           <% end %>
           <% if @current_student.present? %>
             <th>View Activity</th>
-            <th class="hidden-sm hidden-xs">Sign Up?</th>
+            <th class="hidden-sm hidden-xs">Sign Up/Out?</th>
           <% end %>
         </tr>
         <% @activities.each do |activity| %>
@@ -105,7 +105,7 @@
               <th>Delete Activity</th> -->
             <% end %>
             <% if @current_student.present? %>
-              <th>Sign Up?</th>
+              <th>Sign Up/Out?</th>
             <% end %>
           </tr>
           <% @activities.each do |activity| %>
