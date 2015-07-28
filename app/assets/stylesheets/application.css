@@ -18,7 +18,7 @@
 .application-body, .no-padding, .about-gems {
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
-  margin-bottom: 0 !important;
+/*  margin-bottom: 0 !important;*/
 }
 
 body {
