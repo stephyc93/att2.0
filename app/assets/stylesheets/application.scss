@@ -31,7 +31,13 @@ body {
 
 .center {
   background-color: #dedede;
-  margin: 10% 37% 10% 37%;
+  margin: 10% 37%;
+}
+
+@media (max-width:991px){
+  .center{
+    margin:10% 24%;
+  }
 }
 
 .white {
