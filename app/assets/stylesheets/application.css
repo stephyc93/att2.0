@@ -24,6 +24,23 @@ body {
   color: white;
 }
 
+.row {
+  margin-bottom: 10%;
+}
+
+.center {
+  background-color: #dedede;
+  margin: 10% 37% 10% 37%;
+}
+
+.white {
+  color: white;
+}
+
+#fullname {
+  width: 300px;
+}
+
 #h1 {
   text-align: center;
   color: white;
@@ -33,7 +50,11 @@ h1, h2, h3, label, p {
   color: black;
 }
 
-th h3 {
+#map {
+  color: black;
+}
+
+th h3, th p {
   color: white;
 }
 
