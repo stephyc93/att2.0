@@ -26,9 +26,14 @@ body {
   background-color: #272b30;
 }
 
+.top {
+  padding-top: 2%;
+}
+
 .button {
   padding-bottom: 2%;
 }
+
 
 .row {
 
