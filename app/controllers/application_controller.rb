@@ -36,11 +36,11 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :fullname, :parent, :student, :teacher) }
+	  devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :fullname, :parent, :student, :teacher, :avatar) }
     devise_parameter_sanitizer.for(:accept_invitation).concat [:first_name, :last_name, :phone]
     devise_parameter_sanitizer.for(:accept_invitation) do |u|
     u.permit(:first_name, :last_name, :phone, :password, :password_confirmation,
-             :invitation_token)
+             :invitation_token, :avatar)
     end
   end
 
