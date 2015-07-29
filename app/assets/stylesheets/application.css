@@ -26,12 +26,23 @@ body {
   background-color: #272b30;
 }
 
-.buttom {
+.top {
+  padding-top: 2%;
+}
+
+.button {
   padding-bottom: 2%;
 }
 
+
 .row {
 
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .center {
@@ -52,8 +63,12 @@ body {
   color: white;
   }
 
-h1, h2, h3, label, p {
+h1, h3, label, p {
   color: black;
+}
+
+h2 {
+  color: red;
 }
 
 #map {
