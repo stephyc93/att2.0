@@ -19,10 +19,29 @@ class ActivitiesController < ApplicationController
 
   def create
 
-    params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p') if params[:activity][:start].present?
-    params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p') if params[:activity][:end].present?
+    if params[:activity][:end].blank? || params[:activity][:start].blank?
+      flash[:warning] = "You must provide a start and end date."
+      return redirect_to :back
+    end
+
+    if params[:activity][:location].blank? || params[:activity][:name].blank?
+      flash[:warning] = "All fields are required."
+      return redirect_to :back
+    end
+    params[:activity][:start] = DateTime.strptime(params[:activity][:start],'%m/%d/%Y %I:%M %p')
+    params[:activity][:end] = DateTime.strptime(params[:activity][:end],'%m/%d/%Y %I:%M %p')
     params[:activity][:permission_slip] = params[:permission_slip]
     params[:activity][:teacher_id] = @current_teacher.id
+
+    if params[:activity][:start].to_date != params[:activity][:end].to_date
+      flash[:warning] = "Start and End Dates must be on the same day."
+      return redirect_to :back
+    end
+
+    if params[:activity][:end].to_time < params[:activity][:start].to_time
+      flash[:warning] = "You can't have an end date before a start date."
+      return redirect_to :back
+    end
 
     @activity = Activity.new(activity_params)
 
@@ -30,7 +49,6 @@ class ActivitiesController < ApplicationController
       flash[:success] = "#{@activity.name} has been created."
       redirect_to activities_path
     else
-      flash[:warning] = "Your activity was not created. #{@activity.errors.full_messages.to_sentence}"
       render :new
     end
   end
