@@ -9,7 +9,7 @@
       <div class="form-group">
         <label for="start_time">Start Date and Time</label>
         <div class='input-group date' id='start_time'>
-          <%= f.text_field :start, class: 'form-control' %>
+          <%= f.text_field :start, class: 'form-control', value: f.object.start.try(:strftime,"%m/%d/%Y %I:%M %p") %>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
@@ -18,7 +18,7 @@
       <div class="form-group">
         <label for="end_time">End Date and Time</label>
         <div class='input-group date' id='end_time'>
-          <%= f.text_field :end, class: 'form-control' %>
+          <%= f.text_field :end, class: 'form-control', value: f.object.start.try(:strftime,"%m/%d/%Y %I:%M %p") %>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-calendar"></span>
           </span>
