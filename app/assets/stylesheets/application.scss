@@ -18,7 +18,6 @@
 .application-body, .no-padding, .about-gems {
   background-image: url("http://beyondthespectrum.org/wp-content/uploads/2014/11/chalkboard.jpg");
   background-repeat: no-repeat;
-/*  margin-bottom: 0 !important;*/
 }
 
 form.new_user #error_explanation li {
@@ -64,7 +63,13 @@ body {
 
 .center {
   background-color: #dedede;
-  margin: 10% 37% 10% 37%;
+  margin: 10% 37%;
+}
+
+@media (max-width:991px){
+  .center{
+    margin:10% 24%;
+  }
 }
 
 .white {
