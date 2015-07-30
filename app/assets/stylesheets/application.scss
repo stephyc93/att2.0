@@ -20,6 +20,10 @@
   background-repeat: no-repeat;
 }
 
+form.new_user #error_explanation li {
+  color: red;
+}
+
 body {
   color: white;
   background-color: #272b30;
@@ -31,6 +35,19 @@ body {
 
 .button {
   padding-bottom: 2%;
+}
+
+.alert-alert {
+    color: #fff;
+    background-color: #f89406;
+    border-color: #e96506;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
 
 
