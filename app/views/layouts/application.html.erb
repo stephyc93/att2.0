@@ -41,8 +41,8 @@
         <li role="presentation"><a href="/about">About</a></li>
         <% if current_user && current_user.email.present? %>
           <li role="presentation">
-            <%= link_to_if(current_user.teacher?, "Enrollment", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
-            <%= link_to_if(current_user.student?, "Enrollment", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
+            <%= link_to("Enrollment", { controller: "teachers", action: "index" }) unless current_user.student? || current_user.parent? %>
+            <%= link_to("Enrollment", { controller: "students", action: "index" })  unless current_user.teacher? || current_user.parent? %>
           </li>
           <% if current_user.teacher? %>
             <li role="presentation"><%= link_to "Attendance", teacher_path(@current_teacher) %></li>
@@ -74,13 +74,10 @@
 <body class = "<%= action_name %>">
 
   <div class="container">
-  
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert alert-#{name}" %>
     <% end %>
-
     <%= yield %>
-
   </div>
 
 </body>
